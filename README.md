@@ -4,8 +4,7 @@
 
 A [Flarum](http://flarum.org) extension. Moderator Strikes extension for flarum.
 
-Credit: This is essentially built as an expansion upon Friends of Flarum's Moderator Notes, with some added functionality to allow for the
-strikes functionalty. Full credit to Ian Morland and the GiffGaff community for writing the base of this.
+Credit: This is uses a lot of code from, and expands upon, Friends of Flarum's Moderator Notes extension, written by Ian Morland and the GiffGaff community.
 
 ### Installation
 
