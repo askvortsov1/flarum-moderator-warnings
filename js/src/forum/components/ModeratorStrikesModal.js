@@ -2,7 +2,7 @@ import Modal from 'flarum/components/Modal';
 import Button from 'flarum/components/Button';
 import username from 'flarum/helpers/username';
 
-export default class ModeratorStrikesCreate extends Modal {
+export default class ModeratorStrikesModal extends Modal {
     init() {
         super.init();
 
@@ -11,7 +11,7 @@ export default class ModeratorStrikesCreate extends Modal {
     }
 
     className() {
-        return 'ModeratorStrikesCreateModal Modal--large';
+        return 'ModeratorStrikesModal Modal--large';
     }
 
     title() {
