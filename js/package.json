@@ -1,5 +1,5 @@
 {
-  "name": "@askvortsov/flarum-moderator-strikes",
+  "name": "@askvortsov/flarum-moderator-warnings",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

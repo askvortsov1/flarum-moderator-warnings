@@ -3,23 +3,23 @@ import app from 'flarum/app';
 import PostControls from 'flarum/utils/PostControls';
 import Button from 'flarum/components/Button';
 
-import ModeratorStrikesModal from './components/ModeratorStrikesModal';
+import WarningsModal from './components/WarningsModal';
 
 export default function () {
     extend(PostControls, 'moderationControls', function (items, post) {
-        if (!post.canManageModeratorStrikes()) return;
+        if (!post.canManageWarnings()) return;
         console.log(post)
         console.log(post.props)
         const user = post.user();
 
-        items.add('strike',
+        items.add('warning',
             <Button
                 icon="fas fa-exclamation-circle"
-                onclick={() => app.modal.show(new ModeratorStrikesModal({
+                onclick={() => app.modal.show(new WarningsModal({
                     callback: () => {},
                     user: user,
                 }))}>
-                {app.translator.trans('askvortsov-moderator-strikes.forum.post_controls.strike_button')}
+                {app.translator.trans('askvortsov-moderator-warnings.forum.post_controls.warning_button')}
             </Button>
         );
     });

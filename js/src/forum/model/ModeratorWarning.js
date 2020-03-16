@@ -1,7 +1,7 @@
 import Model from 'flarum/Model';
 
-export default class ModeratorStrike extends Model { }
-Object.assign(ModeratorStrike.prototype, {
+export default class Warnings extends Model { }
+Object.assign(Warnings.prototype, {
     id: Model.attribute('id'),
     comment: Model.attribute('comment'),
     points: Model.attribute('points'),

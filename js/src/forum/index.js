@@ -1,20 +1,20 @@
 import app from 'flarum/app';
-import addModeratorStrikesPage from './addModeratorStrikesPage';
-import addModerationStrikesControl from './addModerationStrikesControl';
-import ModeratorStrike from './model/ModeratorStrike';
+import addWarningsPage from './addWarningsPage';
+import addModerationWarningsControl from './addModerationWarningsControl';
+import Warnings from './model/Warnings';
 import { Extend } from '@flarum/core/forum';
 import Post from 'flarum/models/Post';
 import User from 'flarum/models/User';
 import Model from 'flarum/Model';
 
-app.initializers.add('askvortsov/flarum-moderator-strikes', app => {
-    app.store.models.moderatorStrike = ModeratorStrike;
-    app.store.models.strikes = ModeratorStrike;
-    User.prototype.canViewModeratorStrikes = Model.attribute('canViewModeratorStrikes');
-    User.prototype.canManageModeratorStrikes = Model.attribute('canManageModeratorStrikes');
-    Post.prototype.canManageModeratorStrikes = Model.attribute('canManageModeratorStrikes');
-    addModerationStrikesControl();
-    addModeratorStrikesPage();
+app.initializers.add('askvortsov/flarum-moderator-warnings', app => {
+    app.store.models.Warnings = Warnings;
+    app.store.models.warnings = Warnings;
+    User.prototype.canViewWarnings = Model.attribute('canViewWarnings');
+    User.prototype.canManageWarnings = Model.attribute('canManageWarnings');
+    Post.prototype.canManageWarnings = Model.attribute('canManageWarnings');
+    addModerationWarningsControl();
+    addWarningsPage();
 });
 
-export const extend = [new Extend.Model('moderatorStrikes', ModeratorStrike)];
+export const extend = [new Extend.Model('Warnings', Warnings)];

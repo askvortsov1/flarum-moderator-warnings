@@ -119,16 +119,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('askvortsov/flarum-moderator-strikes', function () {
+flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('askvortsov/flarum-moderator-warnings', function () {
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_components_PermissionGrid__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'moderateItems', function (items) {
-    items.add('moderator-strikes-view', {
+    items.add('moderator-warnings-view', {
       icon: 'fas fa-images',
-      label: flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('fof-moderator-strikes.admin.permissions.viewstrikes'),
-      permission: 'user.viewModeratorStrikes'
-    }, 1), items.add('moderator-strikes-manage', {
+      label: flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('fof-moderator-warnings.admin.permissions.viewwarnings'),
+      permission: 'user.viewWarnings'
+    }, 1), items.add('moderator-warnings-manage', {
       icon: 'fas fa-edit',
-      label: flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('fof-moderator-strikes.admin.permissions.createstrikes'),
-      permission: 'user.manageModeratorStrikes'
+      label: flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('fof-moderator-warnings.admin.permissions.createwarnings'),
+      permission: 'user.manageWarnings'
     }, 1);
   });
 });

@@ -1,7 +1,7 @@
 import UserPage from 'flarum/components/UserPage';
-import ModeratorStrikes from './ModeratorStrikes';
+import Warnings from './Warnings';
 
-export default class ModeratorStrikesPage extends UserPage {
+export default class WarningsPage extends UserPage {
     init() {
         super.init();
         this.loadUser(m.route.param('username'));
@@ -10,7 +10,7 @@ export default class ModeratorStrikesPage extends UserPage {
     content() {
         return (
             <div className="DiscussionsUserPage">
-                {ModeratorStrikes.component({
+                {Warnings.component({
                     params: {
                         user: this.user,
                         sort: 'newest',

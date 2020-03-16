@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Askvortsov\FlarumModeratorStrikes\Model;
+namespace Askvortsov\FlarumWarnings\Model;
 
 use Flarum\Database\AbstractModel;
 use Flarum\User\User;
@@ -10,9 +10,9 @@ use Flarum\User\User;
  * @property Date
  * @property User addedByUser
  */
-class ModeratorStrike extends AbstractModel
+class Warnings extends AbstractModel
 {
-    protected $table = 'moderation_strikes';
+    protected $table = 'warnings';
 
     protected $dates = ['created_at', 'hidden_at'];
 
@@ -28,8 +28,8 @@ class ModeratorStrike extends AbstractModel
 
     public static function pointsForUser($user)
     {
-        self::where('user_id', $user->id)->get()->map(function ($strike) {
-                    return $strike->points;
+        self::where('user_id', $user->id)->get()->map(function ($warning) {
+                    return $warning->points;
                 })->sum();
     }
 }

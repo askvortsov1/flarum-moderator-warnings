@@ -1,6 +1,6 @@
 {
-  "name": "askvortsov/flarum-moderator-strikes",
-  "description": "Moderator Strikes extension for flarum.",
+  "name": "askvortsov/flarum-moderator-warnings",
+  "description": "Moderator Warnings extension for flarum.",
   "keywords": [
     "flarum"
   ],
@@ -18,12 +18,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Askvortsov\\FlarumModeratorStrikes\\": "src/"
+      "Askvortsov\\FlarumWarnings\\": "src/"
     }
   },
   "extra": {
     "flarum-extension": {
-      "title": "Flarum Moderator Strikes",
+      "title": "Flarum Moderator Warnings",
       "icon": {
         "name": "fas fa-exclamation-circle",
         "backgroundColor": "#6932D1",

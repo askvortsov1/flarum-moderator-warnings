@@ -1,17 +1,17 @@
 import Component from 'flarum/Component';
 import app from 'flarum/app';
 import LoadingIndicator from 'flarum/components/LoadingIndicator';
-import StrikeListItem from './StrikeListItem';
+import WarningListItem from './WarningListItem';
 import Button from 'flarum/components/Button';
-import ModeratorStrikeCreate from './ModeratorStrikesModal';
+import WarningsCreate from './WarningsModal';
 import listItems from 'flarum/helpers/listItems';
 import ItemList from 'flarum/utils/ItemList';
 
-export default class ModeratorStrikes extends Component {
+export default class Warnings extends Component {
     init() {
         super.init();
         this.loading = true;
-        this.strikes = [];
+        this.warnings = [];
         this.refresh();
     }
 
@@ -24,20 +24,20 @@ export default class ModeratorStrikes extends Component {
 
         return (
             <div className="DiscussionList">
-                <h1 className="DiscussionList-strikes">{app.translator.trans('askvortsov-moderator-strikes.forum.user.strikes')}</h1>
-                <div class="ModeratorStrikes-toolbar">
-                    <ul className="ModeratorStrikes-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
+                <h1 className="DiscussionList-warnings">{app.translator.trans('askvortsov-moderator-warnings.forum.user.warnings')}</h1>
+                <div class="Warnings-toolbar">
+                    <ul className="Warnings-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
                 </div>
                 <ul className="DiscussionList-discussions">
-                    {this.strikes.map(strike => {
+                    {this.warnings.map(warning => {
                         return (
-                            <li key={strike.id()} data-id={strike.id()}>
-                                {StrikeListItem.component({ strike })}
+                            <li key={warning.id()} data-id={warning.id()}>
+                                {WarningListItem.component({ warning })}
                             </li>
                         );
                     })}
-                    {!this.loading && this.strikes.length === 0 && (
-                        <label>{app.translator.trans('askvortsov-moderator-strikes.forum.moderatorStrikes.noStrikes')}</label>
+                    {!this.loading && this.warnings.length === 0 && (
+                        <label>{app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.noWarnings')}</label>
                     )}
                 </ul>
                 <div className="DiscussionList-loadMore">{loading}</div>
@@ -48,15 +48,15 @@ export default class ModeratorStrikes extends Component {
     actionItems() {
         const { user } = this.props.params;
         const items = new ItemList();
-        const canCreateStrike = user.canManageModeratorStrikes();
+        const canCreateWarning = user.canManageWarnings();
 
         items.add(
-            'create_strike',
+            'create_warning',
             Button.component({
-                children: app.translator.trans('askvortsov-moderator-strikes.forum.moderatorStrikes.add_button'),
+                children: app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.add_button'),
                 className: 'Button Button--primary',
                 onclick: this.handleOnClickCreate.bind(this),
-                disabled: !canCreateStrike,
+                disabled: !canCreateWarning,
             })
         );
 
@@ -64,7 +64,7 @@ export default class ModeratorStrikes extends Component {
     }
 
     parseResults(results) {
-        [].push.apply(this.strikes, results);
+        [].push.apply(this.warnings, results);
         this.loading = false;
         m.lazyRedraw();
 
@@ -72,9 +72,9 @@ export default class ModeratorStrikes extends Component {
     }
 
     refresh() {
-        return app.store.find('strikes', this.props.params.user.id()).then(
+        return app.store.find('warnings', this.props.params.user.id()).then(
             results => {
-                this.strikes = [];
+                this.warnings = [];
                 this.parseResults(results);
             },
             () => {
@@ -87,7 +87,7 @@ export default class ModeratorStrikes extends Component {
     handleOnClickCreate(e) {
         e.preventDefault();
         app.modal.show(
-            new ModeratorStrikeCreate({
+            new WarningsCreate({
                 callback: this.refresh.bind(this),
                 ...this.props.params,
             })
