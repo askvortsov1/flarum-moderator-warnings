@@ -3,21 +3,19 @@ import app from 'flarum/app';
 import PostControls from 'flarum/utils/PostControls';
 import Button from 'flarum/components/Button';
 
-import WarningsModal from './components/WarningModal';
+import WarningModal from './components/WarningModal';
 
 export default function () {
     extend(PostControls, 'moderationControls', function (items, post) {
-        if (!post.canManageWarnings()) return;
-        console.log(post)
-        console.log(post.props)
-        const user = post.user();
+        if (!app.session.user.canManageWarnings()) return;
 
         items.add('warning',
             <Button
                 icon="fas fa-exclamation-circle"
                 onclick={() => app.modal.show(new WarningModal({
                     callback: () => {},
-                    user: user,
+                    user: post.user(),
+                    post: post,
                 }))}>
                 {app.translator.trans('askvortsov-moderator-warnings.forum.post_controls.warning_button')}
             </Button>

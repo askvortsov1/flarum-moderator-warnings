@@ -1,0 +1,268 @@
+.WarningListItem {
+  .tooltip .tooltip-inner {
+    max-width: none;
+  }
+}
+.WarningListItem--hidden {
+  .WarningListItem-content {
+    opacity: 0.5;
+  }
+}
+
+.WarningListItem a {
+  text-decoration: none;
+}
+.WarningListItem-content {
+  position: relative;
+  color: @muted-color;
+}
+.WarningListItem-main {
+  color: inherit;
+  text-decoration: none;
+}
+.WarningListItem-author {
+  float: left;
+  margin-top: 13px;
+}
+.WarningListItem-badges {
+  float: left;
+  margin-top: 10px;
+  text-align: right;
+  white-space: nowrap;
+  pointer-events: none;
+
+  .Badge {
+    margin-left: -10px;
+    position: relative;
+    pointer-events: auto;
+  }
+}
+.WarningListItem-main {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 0;
+}
+.WarningListItem-title {
+  margin: 0 0 3px;
+  line-height: 1.3;
+  color: @heading-color;
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .WarningList:not(.WarningList--searchResults) .read & {
+    color: mix(@heading-color, @body-bg, 55%);
+  }
+  .WarningList:not(.WarningList--searchResults) .unread & {
+    font-weight: 600;
+  }
+
+  mark {
+    background: none;
+    box-shadow: none;
+    font-weight: bold;
+    color: @text-color;
+  }
+}
+.WarningListItem-info {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+  color: @muted-more-color;
+
+  > li {
+    display: inline;
+  }
+  .username {
+    font-weight: bold;
+  }
+  .item-terminalPost .icon {
+    font-size: 11px;
+    margin-right: -1px;
+  }
+  .item-excerpt {
+    margin-top: 4px;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.5em;
+    display: block;
+    word-break: break-word;
+
+    .WarningPage-list & {
+      margin-right: 0;
+    }
+    mark {
+      background: none;
+      box-shadow: none;
+      font-weight: bold;
+      color: inherit;
+    }
+  }
+}
+.WarningListItem-count {
+  float: right;
+  margin-top: 12px;
+  text-decoration: none;
+
+  .unread & {
+    cursor: pointer;
+  }
+}
+
+
+@media @phone {
+  .WarningListItem-controls {
+    display: none;
+  }
+  .WarningListItem-content {
+    padding-left: 15px + 45px;
+    padding-right: 15px + 35px;
+
+    &:active {
+      background: @control-bg;
+    }
+  }
+  .WarningListItem-author {
+    margin-left: -45px;
+
+    .Avatar {
+      .Avatar--size(32px);
+    }
+  }
+  .WarningListItem-badges {
+    margin-left: -45px;
+    width: 38px;
+
+    .badge {
+      .Badge--size(20px);
+      margin-left: -13px;
+    }
+  }
+  .WarningListItem-main {
+    margin-right: -45px;
+  }
+  .WarningListItem-title {
+    font-size: 14px;
+    text-decoration: none !important;
+  }
+  .WarningListItem-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .WarningListItem-count {
+    margin-right: -35px;
+    background: @control-bg;
+    color: @control-color;
+    border-radius: @border-radius;
+    font-size: 12px;
+    padding: 2px 6px;
+
+    .unread & {
+      background: @primary-color;
+      color: #fff;
+      font-weight: bold;
+
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+
+
+@media @tablet-up {
+  .WarningListItem {
+    position: relative;
+    margin-right: -15px;
+    padding-right: 25px;
+    padding-left: 15px;
+    margin-left: -15px;
+    border-radius: @border-radius;
+    transition: background 0.2s;
+
+    &:hover {
+      background: mix(@control-bg, @body-bg, 50%);
+    }
+    &:hover .WarningListItem-controls,
+    .WarningListItem-controls.open {
+      opacity: 1;
+    }
+    .WarningListItem-controls.open {
+      z-index: 3;
+    }
+  }
+  .WarningListItem-controls {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    .Dropdown-toggle {
+      display: block;
+    }
+    .Dropdown-menu {
+      right: 0;
+      left: auto;
+    }
+  }
+  .WarningListItem-info {
+    .item-excerpt {
+      margin-right: 170px;
+    }
+  }
+  .WarningListItem-content {
+    padding-left: 52px;
+    padding-right: 80px;
+  }
+  .WarningListItem-author {
+    margin-left: -52px;
+
+    .Avatar {
+      .Avatar--size(36px);
+    }
+  }
+  .WarningListItem-badges {
+    margin-left: -55px;
+    width: 48px;
+  }
+  .WarningListItem-main {
+    margin-right: -65px;
+  }
+  .WarningListItem-title {
+    font-size: 16px;
+  }
+  .WarningListItem-count {
+    margin-top: 12px;
+    margin-right: -70px;
+    width: 55px;
+    color: @muted-color;
+    font-size: 14px;
+    padding-left: 21px;
+
+    &:before {
+      .far();
+      content: @fa-var-comment;
+      float: left;
+      margin-left: -21px;
+      margin-top: 3px;
+    }
+    .unread & {
+      color: @heading-color;
+      font-weight: bold;
+
+      &:before {
+        .fa();
+        content: @fa-var-comment;
+      }
+      &:hover:before {
+        .fa();
+        content: @fa-var-check;
+      }
+    }
+  }
+}

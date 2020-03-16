@@ -26,10 +26,10 @@ class Warning extends AbstractModel
         return $this->hasOne(User::class, 'id', 'hidden_user_id');
     }
 
-    public static function pointsForUser($user)
+    public static function strikesForUser($user)
     {
-        self::where('user_id', $user->id)->get()->map(function ($warning) {
-                    return $warning->points;
+        return self::where('user_id', $user->id)->get()->map(function ($warning) {
+                    return $warning->strikes;
                 })->sum();
     }
 }

@@ -19,19 +19,13 @@ class Serialize
     {
         if ($event->isSerializer(UserSerializer::class)) {
             $event->attributes['canViewWarnings'] = $event
-                ->actor
+                ->model
                 ->can('viewWarnings', $event->model);
 
             $event->attributes['canManageWarnings'] = $event
-                ->actor
+                ->model
                 ->can('manageWarnings', $event->model);
-            if ($event->attributes['canViewWarnings']) {
-                $event->attributes['warningCount'] = Warning::pointsForUser($event->model);
-            }
-        } elseif ($event->isSerializer(PostSerializer::class)) {
-            $event->attributes['canManageWarnings'] = $event
-                ->actor
-                ->can('manageWarnings', $event->model);
+            $event->attributes['strikeCount'] = Warning::strikesForUser($event->model);
         }
     }
 }

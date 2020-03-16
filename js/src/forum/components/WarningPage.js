@@ -1,7 +1,7 @@
 import UserPage from 'flarum/components/UserPage';
-import Warnings from './Warnings';
+import WarningList from './WarningList';
 
-export default class WarningsPage extends UserPage {
+export default class WarningPage extends UserPage {
     init() {
         super.init();
         this.loadUser(m.route.param('username'));
@@ -9,8 +9,8 @@ export default class WarningsPage extends UserPage {
 
     content() {
         return (
-            <div className="DiscussionsUserPage">
-                {Warnings.component({
+            <div className="WarningsUserPage">
+                {WarningList.component({
                     params: {
                         user: this.user,
                         sort: 'newest',

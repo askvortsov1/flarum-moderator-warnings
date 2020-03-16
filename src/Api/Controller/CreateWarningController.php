@@ -30,17 +30,26 @@ class CreateWarningController extends AbstractCreateController
 
         $warning = new Warning();
         $warning->user_id = $requestData['userId'];
-        $warning->comment = $requestData['comment'];
-        $warning->points = $requestData['points'];
+        $warning->public_comment = $requestData['public_comment'];
+        $warning->private_comment = $requestData['private_comment'];
+        $warning->strikes = $requestData['strikes'];
         $warning->created_user_id = $actor->id;
         $warning->created_at = Carbon::now();
 
-        if ($warning->comment === '') {
-            throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.no_comment_given')]);
+        if (array_key_exists('postId', $requestData)) {
+            $warning->post_id = $requestData['postId'];
         }
 
-        if (! $warning->points) {
-            $warning->points = 0;
+        if ($warning->public_comment === '') {
+            throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.validation.public_comment_required')]);
+        }
+
+        if (!$warning->strikes) {
+            $warning->strikes = 0;
+        }
+
+        if ($warning->strikes < 0 || $warning->strikes > 5) {
+            throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.validation.invalid_strike_count')]);
         }
 
         $warning->save();

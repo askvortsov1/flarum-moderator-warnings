@@ -5,6 +5,7 @@ namespace Askvortsov\FlarumWarnings\Api\Controller;
 use Flarum\Api\Controller\AbstractListController;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\User\Exception\PermissionDeniedException;
+use Flarum\User\User;
 use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
 use Askvortsov\FlarumWarnings\Model\Warning;
 use Illuminate\Support\Arr;
@@ -35,7 +36,7 @@ class ListWarningsController extends AbstractListController
 
         $actor = $request->getAttribute('actor');
 
-        $this->assertCan($actor, 'user.viewWarnings');
+        $this->assertCan($actor, 'user.viewWarnings', User::find($id));
 
         return Warning::where('user_id', $id)->orderBy('created_at', 'desc')->get();
     }

@@ -13,7 +13,7 @@ return [
             $table->bigIncrements('id');
 
             $table->integer('user_id')->unsigned();
-            $table->integer('points');
+            $table->integer('strikes');
             $table->mediumText('public_comment');
             $table->mediumText('private_comment');
             $table->timestamps();

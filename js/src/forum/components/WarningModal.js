@@ -2,12 +2,13 @@ import Modal from 'flarum/components/Modal';
 import Button from 'flarum/components/Button';
 import username from 'flarum/helpers/username';
 
-export default class WarningsModal extends Modal {
+export default class WarningModal extends Modal {
     init() {
         super.init();
 
-        this.warningContent = m.prop('');
-        this.warningPoints = m.prop(0);
+        this.publicComment = m.prop('');
+        this.privateComment = m.prop('');
+        this.strikes = m.prop(0);
     }
 
     className() {
@@ -25,12 +26,13 @@ export default class WarningsModal extends Modal {
                     <div className="Form-group">
                         <div>
                             <label>
-                                {app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.points_heading')}
+                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.strikes_heading')}
                                 <input
                                     type="number"
                                     className="FormControl"
-                                    value={this.warningPoints()} min="0" max="5"
-                                    oninput={m.withAttr('value', this.warningPoints)}>
+                                    value={this.strikes()}
+                                    min="0" max="5" required={true}
+                                    oninput={m.withAttr('value', this.strikes)}>
                                 </input>
                             </label>
                         </div>
@@ -38,13 +40,29 @@ export default class WarningsModal extends Modal {
                     <div className="Form-group">
                         <div>
                             <label>
-                                {app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.input_heading', {
+                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.public_comment_heading', {
                                     username: username(this.props.user),
                                 })}
                                 <textarea
                                     className="FormControl"
-                                    value={this.warningContent()}
-                                    oninput={m.withAttr('value', this.warningContent)}
+                                    value={this.publicComment()}
+                                    required={true}
+                                    oninput={m.withAttr('value', this.publicComment)}
+                                    rows="6"
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    <div className="Form-group">
+                        <div>
+                            <label>
+                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.private_comment_heading', {
+                                    username: username(this.props.user),
+                                })}
+                                <textarea
+                                    className="FormControl"
+                                    value={this.privateComment()}
+                                    oninput={m.withAttr('value', this.privateComment)}
                                     rows="6"
                                 />
                             </label>
@@ -52,7 +70,7 @@ export default class WarningsModal extends Modal {
                     </div>
                     <div className="Form-group">
                         <Button className="Button Button--primary Button--block" type="submit" loading={this.loading}>
-                            {app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.submit_button')}
+                            {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.submit_button')}
                         </Button>
                     </div>
                 </div>
@@ -65,26 +83,22 @@ export default class WarningsModal extends Modal {
 
         this.loading = true;
 
+        const newWarning = {
+            userId: this.props.user.id(),
+            strikes: this.strikes(),
+            public_comment: this.publicComment(),
+            private_comment: this.privateComment(),
+        };
+
+        if (this.props.post) {
+            newWarning.postId = this.props.post.id();
+        }
+
         app.store
             .createRecord('warnings')
-            .save(
-                {
-                    userId: this.props.user.id(),
-                    points: this.warningPoints(),
-                    comment: this.warningContent(),
-                },
-                { errorHandler: this.onerror.bind(this) }
-            )
+            .save(newWarning)
             .then(this.hide.bind(this))
             .then(this.props.callback)
             .catch(() => { });
-    }
-
-    onerror(error) {
-        if (error.status === 422) {
-            error.alert.props.children = app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.no_content_given');
-        }
-
-        super.onerror(error);
     }
 }

@@ -1,17 +1,15 @@
 import { extend } from 'flarum/extend';
 import UserPage from 'flarum/components/UserPage';
 import LinkButton from 'flarum/components/LinkButton';
-import WarningsPage from './components/WarningsPage';
+import WarningPage from './components/WarningPage';
 import Model from 'flarum/Model';
 import User from 'flarum/models/User';
 
 export default function () {
-    User.prototype.canViewWarnings = Model.attribute('canViewWarnings');
-
-    app.routes['user.warnings'] = { path: '/u/:username/warnings', component: WarningsPage.component() };
+    app.routes['user.warnings'] = { path: '/u/:username/warnings', component: WarningPage.component() };
 
     extend(UserPage.prototype, 'navItems', function (items) {
-        if (this.user.canViewWarnings()) {
+        if (app.session.user.canViewWarnings() || this.user.id() === app.session.user.id()) {
             items.add(
                 'warnings',
                 LinkButton.component({

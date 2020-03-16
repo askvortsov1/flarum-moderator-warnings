@@ -4,19 +4,22 @@ askvortsov-moderator-warnings:
       createwarnings: Create moderator warnings
       viewwarnings: View moderator warnings
   forum:
-    Warnings:
+    warning-list:
       add_button: New warning
+      no-warnings: It looks like there are no warnings here.
+      warnings: "Moderator Warnings: {strikes} Strikes Received"
+    warning_list_item:
+      list_item_heading: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes.
+    warning-modal:
       confirmation_message: Your warning has been saved. You may need to refresh the page to see it.
       create-heading: Create a new moderator warning
       dismiss_button: Done
-      points_heading: How many warnings should be applied?
-      input_heading: Why is <strong>{username}</strong> receiving these warnings?
-      list_item_heading: <strong>{mod_username}</strong> gave <strong>{points}</strong> warnings.
+      strikes_heading: How many strikes should be applied?
+      public_comment_heading: Why is <strong>{username}</strong> receiving these warnings?
+      private_comment_heading: Why is <strong>{username}</strong> receiving these warnings?
       no_content_given: An empty warning is not permitted.
-      noWarnings: It looks like there are no warnings here.
       submit_button: Save warning
     post_controls:
       warning_button: Apply Warning
-
     user:
       warnings: Moderator Warnings

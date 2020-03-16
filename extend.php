@@ -13,7 +13,7 @@ namespace Askvortsov\FlarumWarnings;
 
 
 use Flarum\Extend;
-use Askvortsov\FlarumWarnings\Access\WarningPolicy;
+use Askvortsov\FlarumWarnings\Access\UserPolicy;
 use Askvortsov\FlarumWarnings\Api\Controller;
 use Askvortsov\FlarumWarnings\Listeners\Serialize;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -35,6 +35,6 @@ return [
 
     function (Dispatcher $events) {
         $events->subscribe(Serialize::class);
-        $events->subscribe(WarningPolicy::class);
+        $events->subscribe(UserPolicy::class);
     },
 ];

@@ -125,7 +125,8 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('askvortsov/f
       icon: 'fas fa-images',
       label: flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('fof-moderator-warnings.admin.permissions.viewwarnings'),
       permission: 'user.viewWarnings'
-    }, 1), items.add('moderator-warnings-manage', {
+    }, 1);
+    items.add('moderator-warnings-manage', {
       icon: 'fas fa-edit',
       label: flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('fof-moderator-warnings.admin.permissions.createwarnings'),
       permission: 'user.manageWarnings'
