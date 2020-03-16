@@ -18,6 +18,7 @@ askvortsov-moderator-warnings:
       list_item_heading_hidden: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes <strong>(deleted)</strong>
       public_comment: User-Visible Comments
       private_comment: Moderator-Visible Comments
+      linked_post: Linked Post
     warning_modal:
       confirmation_message: Your warning has been saved. You may need to refresh the page to see it.
       create-heading: Create a new moderator warning

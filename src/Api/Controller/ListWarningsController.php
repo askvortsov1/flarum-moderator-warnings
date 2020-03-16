@@ -18,7 +18,7 @@ class ListWarningsController extends AbstractListController
 
     public $serializer = WarningSerializer::class;
 
-    public $include = ['addedByUser'];
+    public $include = ['addedByUser', 'hiddenByUser', 'post', 'post.discussion', 'post.user'];
 
     /**
      * Get the data to be serialized and assigned to the response document.

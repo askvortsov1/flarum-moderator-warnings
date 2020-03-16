@@ -3,6 +3,7 @@ import username from 'flarum/helpers/username';
 import fullTime from 'flarum/helpers/fullTime';
 import classList from 'flarum/utils/classList';
 import Dropdown from 'flarum/components/Dropdown';
+import WarningPost from './WarningPost';
 import WarningControls from './WarningControls';
 
 export default class WarningListItem extends Component {
@@ -28,8 +29,13 @@ export default class WarningListItem extends Component {
               app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading_hidden', { mod_username: username(addedByUser), strikes: warning.strikes() })
               : app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading', { mod_username: username(addedByUser), strikes: warning.strikes() })}</h3>
           {formatedDate}
-          {warning.post()}
+          <br />
           <ul className="WarningListItem-info">
+            {warning.post() ?
+              <li className="item-excerpt">
+                <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.linked_post')}</h4>
+                {WarningPost.component({ post: warning.post() })}
+              </li> : ''}
             <li className="item-excerpt">
               <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.public_comment')}</h4>
               <span>{warning.public_comment()}</span>
