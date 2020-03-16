@@ -5,19 +5,26 @@ askvortsov-moderator-warnings:
       view_warnings: View moderator warnings
       delete_warnings: Delete moderator warnings
   forum:
-    warning-list:
+    warning_controls:
+      delete_button: Delete
+      restore_button: Restore
+      delete_forever_button: Delete Forever
+    warning_list:
       add_button: New warning
       no-warnings: It looks like there are no warnings here.
       warnings: "Moderator Warnings: {strikes} Strikes Received"
     warning_list_item:
-      list_item_heading: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes.
-    warning-modal:
+      list_item_heading: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes
+      list_item_heading_hidden: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes <strong>(deleted)</strong>
+      public_comment: User-Visible Comments
+      private_comment: Moderator-Visible Comments
+    warning_modal:
       confirmation_message: Your warning has been saved. You may need to refresh the page to see it.
       create-heading: Create a new moderator warning
       dismiss_button: Done
       strikes_heading: How many strikes should be applied?
-      public_comment_heading: Why is <strong>{username}</strong> receiving these warnings?
-      private_comment_heading: Why is <strong>{username}</strong> receiving these warnings?
+      public_comment_heading: Why is <strong>{username}</strong> receiving these warnings? These comments will be visible to the user and other moderators.
+      private_comment_heading: Why is <strong>{username}</strong> receiving these warnings? These comments will ONLY be visible to other moderators.
       no_content_given: An empty warning is not permitted.
       submit_button: Save warning
     post_controls:

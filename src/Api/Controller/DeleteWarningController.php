@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-class UpdateWarningController extends AbstractCreateController
+class DeleteWarningController extends AbstractCreateController
 {
     use AssertPermissionTrait;
 
@@ -23,22 +23,11 @@ class UpdateWarningController extends AbstractCreateController
     protected function data(ServerRequestInterface $request, Document $document)
     {
         $actor = $request->getAttribute('actor');
-        $this->assertCan($actor, 'user.manageWarnings');
-
-        $requestBody = $request->getParsedBody();
-        $requestData = $requestBody['data']['attributes'];
+        $this->assertCan($actor, 'user.deleteWarnings');
 
         $warning = Warning::find(Arr::get($request->getQueryParams(), 'warning_id'));
 
-        if ($requestData['isHidden']) {
-            $warning->hidden_at = Carbon::now();
-            $warning->hidden_user_id = $actor->id;
-        } else {
-            $warning->hidden_at = null;
-            $warning->hidden_user_id = null;
-        }
-
-        $warning->save();
+        $warning->delete();
 
         return $warning;
     }

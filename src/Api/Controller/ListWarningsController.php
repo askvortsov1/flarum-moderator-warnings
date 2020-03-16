@@ -38,6 +38,10 @@ class ListWarningsController extends AbstractListController
 
         $this->assertCan($actor, 'user.viewWarnings', User::find($id));
 
-        return Warning::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        if ($actor->can('user.manageWarnings')) {
+            return Warning::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        } else {
+            return Warning::where('user_id', $id)->where('hidden_at', null)->orderBy('created_at', 'desc')->get();
+        }
     }
 }

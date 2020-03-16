@@ -4,8 +4,14 @@
   }
 }
 .WarningListItem--hidden {
+  background-color: #ffcccb;
+  font-style: italic;
+  text-decoration: line-through;
   .WarningListItem-content {
     opacity: 0.5;
+  }
+  .WarningListItem--main {
+    text-decoration: line-through;
   }
 }
 
@@ -67,7 +73,7 @@
 .WarningListItem-info {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0 0;
   font-size: 11px;
   color: @muted-more-color;
 
@@ -97,6 +103,9 @@
       box-shadow: none;
       font-weight: bold;
       color: inherit;
+    }
+    .WarningListItem-subtitle {
+        color: #000000;
     }
   }
 }

@@ -28,7 +28,6 @@ class Serialize
             $event->attributes['canDeleteWarnings'] = $event
                 ->model
                 ->can('user.deleteWarnings', $event->model);
-            $event->attributes['strikeCount'] = Warning::strikesForUser($event->model);
         }
     }
 }

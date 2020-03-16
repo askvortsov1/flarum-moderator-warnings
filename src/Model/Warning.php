@@ -5,6 +5,7 @@ namespace Askvortsov\FlarumWarnings\Model;
 
 use Flarum\Database\AbstractModel;
 use Flarum\User\User;
+use Flarum\Post\Post;
 
 /**
  * @property Date
@@ -26,10 +27,18 @@ class Warning extends AbstractModel
         return $this->hasOne(User::class, 'id', 'hidden_user_id');
     }
 
+    public function post()
+    {
+        return $this->hasOne(Post::class, 'id', 'post_id');
+    }
+
+
     public static function strikesForUser($user)
     {
-        return self::where('user_id', $user->id)->get()->map(function ($warning) {
-                    return $warning->strikes;
-                })->sum();
+        return self::where('user_id', $user->id)->get()->filter(function ($warning) {
+            return is_null($warning->hidden_at);
+        })->map(function ($warning) {
+            return $warning->strikes;
+        })->sum();
     }
 }

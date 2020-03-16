@@ -30,7 +30,8 @@ return [
 
     (new Extend\Routes('api'))
         ->get('/warnings/{user_id}', 'warnings.index', Controller\ListWarningsController::class)
-        ->post('/warnings/{user_id}/{warning_id}', 'warnings.update', Controller\UpdateWarningController::class)
+        ->patch('/warnings/{warning_id}', 'warnings.update', Controller\UpdateWarningController::class)
+        ->delete('/warnings/{warning_id}', 'warnings.delete', Controller\DeleteWarningController::class)
         ->post('/warnings', 'warnings.create', Controller\CreateWarningController::class),
 
     function (Dispatcher $events) {

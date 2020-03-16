@@ -18,7 +18,6 @@ class WarningSerializer extends AbstractSerializer
         $attributes = [
             'id'               => $warnings->id,
             'userId'           => $warnings->user_id,
-            'postId'           => $warnings->post_id,
             'public_comment'   => $warnings->public_comment,
             'strikes'          => $warnings->strikes,
             'createdAt'        => $this->formatDate($warnings->created_at),

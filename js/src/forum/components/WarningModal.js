@@ -26,7 +26,7 @@ export default class WarningModal extends Modal {
                     <div className="Form-group">
                         <div>
                             <label>
-                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.strikes_heading')}
+                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.strikes_heading')}
                                 <input
                                     type="number"
                                     className="FormControl"
@@ -40,7 +40,7 @@ export default class WarningModal extends Modal {
                     <div className="Form-group">
                         <div>
                             <label>
-                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.public_comment_heading', {
+                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.public_comment_heading', {
                                     username: username(this.props.user),
                                 })}
                                 <textarea
@@ -56,7 +56,7 @@ export default class WarningModal extends Modal {
                     <div className="Form-group">
                         <div>
                             <label>
-                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.private_comment_heading', {
+                                {app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.private_comment_heading', {
                                     username: username(this.props.user),
                                 })}
                                 <textarea
@@ -70,7 +70,7 @@ export default class WarningModal extends Modal {
                     </div>
                     <div className="Form-group">
                         <Button className="Button Button--primary Button--block" type="submit" loading={this.loading}>
-                            {app.translator.trans('askvortsov-moderator-warnings.forum.warning-modal.submit_button')}
+                            {app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.submit_button')}
                         </Button>
                     </div>
                 </div>

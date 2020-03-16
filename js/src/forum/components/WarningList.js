@@ -25,7 +25,7 @@ export default class WarningList extends Component {
 
     return (
       <div className="WarningList">
-        <h1 className="WarningList-warnings">{app.translator.trans('askvortsov-moderator-warnings.forum.warning-list.warnings', { strikes: this.user.strikeCount() })}</h1>
+        <h1 className="WarningList-warnings">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings', { strikes: this.strikeCount() })}</h1>
         <div class="Warnings-toolbar">
           <ul className="Warnings-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
         </div>
@@ -38,7 +38,7 @@ export default class WarningList extends Component {
             );
           })}
           {!this.loading && this.warnings.length === 0 && (
-            <label>{app.translator.trans('askvortsov-moderator-warnings.forum.warning-list.no-warnings')}</label>
+            <label>{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.no-warnings')}</label>
           )}
         </ul>
         <div className="WarningList-loadMore">{loading}</div>
@@ -53,7 +53,7 @@ export default class WarningList extends Component {
       items.add(
         'create_warning',
         Button.component({
-          children: app.translator.trans('askvortsov-moderator-warnings.forum.warning-list.add_button'),
+          children: app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.add_button'),
           className: 'Button Button--primary',
           onclick: this.handleOnClickCreate.bind(this),
         })
@@ -61,6 +61,10 @@ export default class WarningList extends Component {
     }
 
     return items;
+  }
+
+  strikeCount() {
+    return this.warnings.filter(warning => !warning.isHidden()).map(warning => warning.strikes()).reduce((a,b) => a + b, 0);
   }
 
   parseResults(results) {
