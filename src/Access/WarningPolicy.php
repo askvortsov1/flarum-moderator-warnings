@@ -6,7 +6,7 @@ use Askvortsov\FlarumWarnings\Model\Warnings;
 use Flarum\User\AbstractPolicy;
 use Flarum\User\User;
 
-class WarningsPolicy extends AbstractPolicy
+class WarningPolicy extends AbstractPolicy
 {
     /**
      * {@inheritdoc}

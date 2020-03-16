@@ -2,8 +2,8 @@
 
 namespace Askvortsov\FlarumWarnings\Api\Controller;
 
-use Askvortsov\FlarumWarnings\Api\Serializer\Warningserializer;
-use Askvortsov\FlarumWarnings\Model\Warnings;
+use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
+use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Api\Controller\AbstractCreateController;
 use Flarum\User\AssertPermissionTrait;
 use Flarum\Foundation\ValidationException;
@@ -11,11 +11,11 @@ use Illuminate\Support\Carbon;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-class CreateWarningsController extends AbstractCreateController
+class CreateWarningController extends AbstractCreateController
 {
     use AssertPermissionTrait;
 
-    public $serializer = Warningserializer::class;
+    public $serializer = WarningSerializer::class;
 
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class CreateWarningsController extends AbstractCreateController
         $requestBody = $request->getParsedBody();
         $requestData = $requestBody['data']['attributes'];
 
-        $warning = new Warnings();
+        $warning = new Warning();
         $warning->user_id = $requestData['userId'];
         $warning->comment = $requestData['comment'];
         $warning->points = $requestData['points'];

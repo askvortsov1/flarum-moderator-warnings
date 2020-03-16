@@ -13,7 +13,7 @@ namespace Askvortsov\FlarumWarnings;
 
 
 use Flarum\Extend;
-use Askvortsov\FlarumWarnings\Access\WarningsPolicy;
+use Askvortsov\FlarumWarnings\Access\WarningPolicy;
 use Askvortsov\FlarumWarnings\Api\Controller;
 use Askvortsov\FlarumWarnings\Listeners\Serialize;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -29,12 +29,12 @@ return [
     new Extend\Locales(__DIR__ . '/resources/locale'),
 
     (new Extend\Routes('api'))
-        ->get('/warnings/{user_id}', 'moderator_warnings.index', Controller\ListWarningsController::class)
-        ->get('/warnings/{user_id}/{id}', 'moderator_warnings.update', Controller\UpdateWarningsController::class)
-        ->post('/warnings', 'moderator-warnings.create', Controller\CreateWarningsController::class),
+        ->get('/warnings/{user_id}', 'warnings.index', Controller\ListWarningsController::class)
+        ->post('/warnings/{user_id}/{warning_id}', 'warnings.update', Controller\UpdateWarningController::class)
+        ->post('/warnings', 'warnings.create', Controller\CreateWarningController::class),
 
     function (Dispatcher $events) {
         $events->subscribe(Serialize::class);
-        $events->subscribe(WarningsPolicy::class);
+        $events->subscribe(WarningPolicy::class);
     },
 ];

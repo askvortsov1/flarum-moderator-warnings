@@ -3,7 +3,7 @@ import app from 'flarum/app';
 import PostControls from 'flarum/utils/PostControls';
 import Button from 'flarum/components/Button';
 
-import WarningsModal from './components/WarningsModal';
+import WarningsModal from './components/WarningModal';
 
 export default function () {
     extend(PostControls, 'moderationControls', function (items, post) {
@@ -15,7 +15,7 @@ export default function () {
         items.add('warning',
             <Button
                 icon="fas fa-exclamation-circle"
-                onclick={() => app.modal.show(new WarningsModal({
+                onclick={() => app.modal.show(new WarningModal({
                     callback: () => {},
                     user: user,
                 }))}>

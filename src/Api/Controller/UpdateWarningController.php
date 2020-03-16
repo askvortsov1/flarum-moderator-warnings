@@ -2,8 +2,8 @@
 
 namespace Askvortsov\FlarumWarnings\Api\Controller;
 
-use Askvortsov\FlarumWarnings\Api\Serializer\Warningserializer;
-use Askvortsov\FlarumWarnings\Model\Warnings;
+use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
+use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Api\Controller\AbstractCreateController;
 use Flarum\User\AssertPermissionTrait;
 use Illuminate\Support\Arr;
@@ -11,11 +11,11 @@ use Illuminate\Support\Carbon;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-class UpdateWarningsController extends AbstractCreateController
+class UpdateWarningController extends AbstractCreateController
 {
     use AssertPermissionTrait;
 
-    public $serializer = Warningserializer::class;
+    public $serializer = WarningSerializer::class;
 
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class UpdateWarningsController extends AbstractCreateController
         $requestBody = $request->getParsedBody();
         $requestData = $requestBody['data']['attributes'];
 
-        $warning = Warnings::find(Arr::get($request->getQueryParams(), 'id'));
+        $warning = Warning::find(Arr::get($request->getQueryParams(), 'id'));
 
         if ($requestData['isHidden']) {
             $warning->hidden_at = Carbon::now();

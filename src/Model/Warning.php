@@ -10,7 +10,7 @@ use Flarum\User\User;
  * @property Date
  * @property User addedByUser
  */
-class Warnings extends AbstractModel
+class Warning extends AbstractModel
 {
     protected $table = 'warnings';
 

@@ -2,7 +2,7 @@
 
 namespace Askvortsov\FlarumWarnings\Listeners;
 
-use Askvortsov\FlarumWarnings\Model\Warnings;
+use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Api\Serializer\PostSerializer;
@@ -26,7 +26,7 @@ class Serialize
                 ->actor
                 ->can('manageWarnings', $event->model);
             if ($event->attributes['canViewWarnings']) {
-                $event->attributes['warningCount'] = Warnings::pointsForUser($event->model);
+                $event->attributes['warningCount'] = Warning::pointsForUser($event->model);
             }
         } elseif ($event->isSerializer(PostSerializer::class)) {
             $event->attributes['canManageWarnings'] = $event
