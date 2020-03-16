@@ -8,19 +8,28 @@ app.initializers.add('askvortsov/flarum-moderator-warnings', () => {
       'moderator-warnings-view',
       {
         icon: 'fas fa-images',
-        label: app.translator.trans('fof-moderator-warnings.admin.permissions.viewwarnings'),
+        label: app.translator.trans('askvortsov-moderator-warnings.admin.permissions.view_warnings'),
         permission: 'user.viewWarnings',
       },
-      1
+      3
     );
     items.add(
       'moderator-warnings-manage',
       {
         icon: 'fas fa-edit',
-        label: app.translator.trans('fof-moderator-warnings.admin.permissions.createwarnings'),
+        label: app.translator.trans('askvortsov-moderator-warnings.admin.permissions.manage_warnings'),
         permission: 'user.manageWarnings',
       },
-      1
+      3
+    );
+    items.add(
+      'moderator-warnings-delete',
+      {
+        icon: 'fas fa-times',
+        label: app.translator.trans('askvortsov-moderator-warnings.admin.permissions.delete_warnings'),
+        permission: 'user.deleteWarnings',
+      },
+      3
     );
   });
 });

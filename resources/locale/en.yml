@@ -1,8 +1,9 @@
 askvortsov-moderator-warnings:
   admin:
     permissions:
-      createwarnings: Create moderator warnings
-      viewwarnings: View moderator warnings
+      manage_warnings: Create and hide moderator warnings
+      view_warnings: View moderator warnings
+      delete_warnings: Delete moderator warnings
   forum:
     warning-list:
       add_button: New warning
