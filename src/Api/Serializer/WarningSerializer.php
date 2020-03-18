@@ -31,6 +31,11 @@ class WarningSerializer extends AbstractSerializer
         return $attributes;
     }
 
+    protected function warnedUser($warnings)
+    {
+        return $this->hasOne($warnings, BasicUserSerializer::class);
+    }
+
     protected function addedByUser($warnings)
     {
         return $this->hasOne($warnings, BasicUserSerializer::class);

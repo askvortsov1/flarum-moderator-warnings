@@ -2,13 +2,11 @@
 
 namespace Askvortsov\FlarumWarnings\Listeners;
 
-use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Api\Serializer\PostSerializer;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class Serialize
+class AddPermissionsToUserSerializer
 {
     public function subscribe(Dispatcher $events)
     {
@@ -20,14 +18,14 @@ class Serialize
         if ($event->isSerializer(UserSerializer::class)) {
             $event->attributes['canViewWarnings'] = $event
                 ->model
-                ->can('user.viewWarnings', $event->model);
+                ->can('user.viewWarnings');
 
             $event->attributes['canManageWarnings'] = $event
                 ->model
-                ->can('user.manageWarnings', $event->model);
+                ->can('user.manageWarnings');
             $event->attributes['canDeleteWarnings'] = $event
                 ->model
-                ->can('user.deleteWarnings', $event->model);
+                ->can('user.deleteWarnings');
         }
     }
 }

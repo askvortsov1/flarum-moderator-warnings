@@ -28,6 +28,8 @@ askvortsov-moderator-warnings:
       private_comment_heading: Why is <strong>{username}</strong> receiving these warnings? These comments will ONLY be visible to other moderators.
       no_content_given: An empty warning is not permitted.
       submit_button: Save warning
+    post:
+      warning: Warned with {strikes} strikes by {mod_username}
     post_controls:
       warning_button: Apply Warning
     user:

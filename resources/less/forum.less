@@ -2,3 +2,24 @@
 @import "forum/WarningListItem";
 @import "forum/WarningToolbar";
 @import "forum/WarningPost";
+
+.Post-warning {
+  position: relative;
+  display: inline-block;
+}
+.Post-warning-summary {
+  cursor: pointer;
+}
+.Post-warning-preview, .PostMention-preview, .MentionsDropdown {
+  margin: 5px 0 !important;
+
+  > li > a {
+    white-space: normal;
+    border-bottom: 0;
+  }
+}
+.PostWarning-preview-discussion {
+  padding-top: 0 !important;
+  font-weight: bold !important;
+  white-space: normal !important;
+}

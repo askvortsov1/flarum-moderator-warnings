@@ -12,6 +12,7 @@ Object.assign(Warnings.prototype, {
     isHidden: computed('hiddenAt', hiddenAt => !!hiddenAt),
     hiddenAt: Model.attribute('hiddenAt', Model.transformDate),
 
+    warnedUser: Model.hasOne('warnedUser'),
     hiddenByUser: Model.hasOne('hiddenByUser'),
     addedByUser: Model.hasOne('addedByUser'),
 

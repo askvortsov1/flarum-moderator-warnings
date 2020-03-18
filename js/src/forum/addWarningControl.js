@@ -7,7 +7,7 @@ import WarningModal from './components/WarningModal';
 
 export default function () {
     extend(PostControls, 'moderationControls', function (items, post) {
-        if (!app.session.user.canManageWarnings()) return;
+        if (!app.session.user || !app.session.user.canManageWarnings()) return;
 
         items.add('warning',
             <Button

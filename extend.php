@@ -15,7 +15,7 @@ namespace Askvortsov\FlarumWarnings;
 use Flarum\Extend;
 use Askvortsov\FlarumWarnings\Access\UserPolicy;
 use Askvortsov\FlarumWarnings\Api\Controller;
-use Askvortsov\FlarumWarnings\Listeners\Serialize;
+use Askvortsov\FlarumWarnings\Listeners;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
@@ -35,7 +35,8 @@ return [
         ->post('/warnings', 'warnings.create', Controller\CreateWarningController::class),
 
     function (Dispatcher $events) {
-        $events->subscribe(Serialize::class);
+        $events->subscribe(Listeners\AddPermissionsToUserSerializer::class);
+        $events->subscribe(Listeners\AddPostWarningRelationship::class);
         $events->subscribe(UserPolicy::class);
     },
 ];

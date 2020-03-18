@@ -1,6 +1,7 @@
 import app from 'flarum/app';
 import addWarningPage from './addWarningPage';
 import addWarningControl from './addWarningControl';
+import addWarningsToPosts from './addWarningsToPosts';
 import Warning from './model/Warning';
 import { Extend } from '@flarum/core/forum';
 import Post from 'flarum/models/Post';
@@ -15,6 +16,7 @@ app.initializers.add('askvortsov/flarum-moderator-warnings', app => {
     User.prototype.strikeCount = Model.attribute('strikeCount');
     addWarningControl();
     addWarningPage();
+    addWarningsToPosts();
 });
 
 export const extend = [new Extend.Model('warnings', Warning)];

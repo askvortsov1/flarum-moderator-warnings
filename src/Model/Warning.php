@@ -17,6 +17,11 @@ class Warning extends AbstractModel
 
     protected $dates = ['created_at', 'hidden_at'];
 
+    public function warnedUser()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
     public function addedByUser()
     {
         return $this->hasOne(User::class, 'id', 'created_user_id');
