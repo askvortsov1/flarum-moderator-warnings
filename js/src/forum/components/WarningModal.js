@@ -91,7 +91,7 @@ export default class WarningModal extends Modal {
         };
 
         if (this.props.post) {
-            newWarning.postId = this.props.post.id();
+            newWarning.post = this.props.post;
         }
 
         app.store

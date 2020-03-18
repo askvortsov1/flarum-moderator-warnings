@@ -36,8 +36,8 @@ class CreateWarningController extends AbstractCreateController
         $warning->created_user_id = $actor->id;
         $warning->created_at = Carbon::now();
 
-        if (array_key_exists('postId', $requestData)) {
-            $warning->post_id = $requestData['postId'];
+        if (array_key_exists('post', $requestData)) {
+            $warning->post_id = $requestData['post']['data']['id'];
         }
 
         if ($warning->public_comment === '') {

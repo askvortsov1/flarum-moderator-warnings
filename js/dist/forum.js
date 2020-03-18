@@ -177,11 +177,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2___default.a, 'moderationControls', function (items, post) {
     if (!flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user || !flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user.canManageWarnings()) return;
+    console.log(post);
     items.add('warning', m(flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
       icon: "fas fa-exclamation-circle",
       onclick: function onclick() {
         return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.modal.show(new _components_WarningModal__WEBPACK_IMPORTED_MODULE_4__["default"]({
-          callback: function callback() {},
+          callback: function callback() {
+            location.reload();
+          },
           user: post.user(),
           post: post
         }));
@@ -262,26 +265,24 @@ function addWarningsToPosts() {
     var post = this.props.post;
     var warnings = post.warnings();
     if (!warnings) return;
-    warnings.forEach(function (warning) {
-      items.add("warnings-" + warning.id(), _components_PostWarningList__WEBPACK_IMPORTED_MODULE_4__["default"].component({
-        warning: warning
-      }));
-    });
+    items.add("warnings", _components_PostWarningList__WEBPACK_IMPORTED_MODULE_4__["default"].component({
+      post: post
+    }));
   });
 }
 
 /***/ }),
 
-/***/ "./src/forum/components/PostWarningList.js":
-/*!*************************************************!*\
-  !*** ./src/forum/components/PostWarningList.js ***!
-  \*************************************************/
+/***/ "./src/forum/components/PostWarning.js":
+/*!*********************************************!*\
+  !*** ./src/forum/components/PostWarning.js ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PostWarningList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PostWarning; });
 /* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
 /* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/Component */ "flarum/Component");
 /* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_Component__WEBPACK_IMPORTED_MODULE_1__);
@@ -296,14 +297,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var PostWarningList = /*#__PURE__*/function (_Component) {
-  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(PostWarningList, _Component);
+var PostWarning = /*#__PURE__*/function (_Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(PostWarning, _Component);
 
-  function PostWarningList() {
+  function PostWarning() {
     return _Component.apply(this, arguments) || this;
   }
 
-  var _proto = PostWarningList.prototype;
+  var _proto = PostWarning.prototype;
 
   _proto.init = function init() {
     _Component.prototype.init.call(this);
@@ -362,12 +363,62 @@ var PostWarningList = /*#__PURE__*/function (_Component) {
     // popup.
 
     $('.Post-warning').find('.Post-warning-summary a').hover(function () {
-      console.log("asdsadas");
       $('.Post-warning').find('[data-number="' + $(this).data('number') + '"]').addClass('active');
     }, function () {
-      console.log("no");
       $('.Post-warning').find('[data-number]').removeClass('active');
     });
+  };
+
+  return PostWarning;
+}(flarum_Component__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+
+
+/***/ }),
+
+/***/ "./src/forum/components/PostWarningList.js":
+/*!*************************************************!*\
+  !*** ./src/forum/components/PostWarningList.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PostWarningList; });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/Component */ "flarum/Component");
+/* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_Component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _PostWarning__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostWarning */ "./src/forum/components/PostWarning.js");
+/* harmony import */ var _WarningPreview__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WarningPreview */ "./src/forum/components/WarningPreview.js");
+
+
+
+
+
+var PostWarningList = /*#__PURE__*/function (_Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(PostWarningList, _Component);
+
+  function PostWarningList() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = PostWarningList.prototype;
+
+  _proto.init = function init() {
+    _Component.prototype.init.call(this);
+
+    this.post = this.props.post;
+  };
+
+  _proto.view = function view() {
+    return m("div", {
+      className: "Post-warning-list"
+    }, this.props.post.warnings().map(function (warning) {
+      return _PostWarning__WEBPACK_IMPORTED_MODULE_2__["default"].component({
+        warning: warning
+      });
+    }));
   };
 
   return PostWarningList;
@@ -885,7 +936,7 @@ var WarningModal = /*#__PURE__*/function (_Modal) {
     };
 
     if (this.props.post) {
-      newWarning.postId = this.props.post.id();
+      newWarning.post = this.props.post;
     }
 
     app.store.createRecord('warnings').save(newWarning).then(this.hide.bind(this)).then(this.props.callback)["catch"](function () {});
