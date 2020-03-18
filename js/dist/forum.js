@@ -338,7 +338,6 @@ var PostWarningList = /*#__PURE__*/function (_Component) {
     var $preview = $('<ul class="Dropdown-menu Post-warning-preview fade"/>');
     this.$().append($preview);
     this.$().children().hover(function () {
-      console.log(warning);
       clearTimeout(timeout);
       timeout = setTimeout(function () {
         if (!$preview.hasClass('in') && $preview.is(':visible')) return; // When the user hovers their mouse over the list of people who have
@@ -1014,6 +1013,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
 /* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/Component */ "flarum/Component");
 /* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_Component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_helpers_fullTime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/helpers/fullTime */ "flarum/helpers/fullTime");
+/* harmony import */ var flarum_helpers_fullTime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_fullTime__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/helpers/username */ "flarum/helpers/username");
+/* harmony import */ var flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3__);
+
+
 
 
 
@@ -1026,19 +1031,34 @@ var WarningPreview = /*#__PURE__*/function (_Component) {
 
   var _proto = WarningPreview.prototype;
 
+  _proto.init = function init() {
+    _Component.prototype.init.call(this);
+
+    this.warning = this.props.warning;
+  };
+
   _proto.view = function view() {
+    var formatedDate = flarum_helpers_fullTime__WEBPACK_IMPORTED_MODULE_2___default()(this.warning.createdAt());
     return m("a", {
       className: "WarningPreview",
       href: app.route('user.warnings', {
-        username: this.props.warning.warnedUser().username()
+        username: this.warning.warnedUser().username()
       }),
-      config: m.route,
-      onclick: this.onclick
-    }, this.props.warning.public_comment());
-  };
-
-  _proto.onclick = function onclick() {
-    console.log("ClICK!");
+      config: m.route
+    }, m("div", {
+      className: "WarningListItem-main"
+    }, m("h3", {
+      className: "WarningListItem-title"
+    }, app.translator.trans('askvortsov-moderator-warnings.forum.post.warning', {
+      strikes: this.warning.strikes(),
+      mod_username: flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default()(this.warning.addedByUser())
+    })), formatedDate, m("br", null), m("ul", {
+      className: "WarningListItem-info"
+    }, m("li", null, m("h4", {
+      className: "WarningListItem-subtitle"
+    }, app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.public_comment')), m("span", null, this.warning.public_comment())), app.session.user.canManageWarnings() ? m("li", null, m("h4", {
+      className: "WarningListItem-subtitle"
+    }, app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.private_comment')), m("span", null, this.warning.private_comment())) : '')));
   };
 
   return WarningPreview;

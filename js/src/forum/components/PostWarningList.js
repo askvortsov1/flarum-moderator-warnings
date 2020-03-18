@@ -41,7 +41,6 @@ export default class PostWarningList extends Component {
         this.$().append($preview);
 
         this.$().children().hover(function () {
-            console.log(warning)
             clearTimeout(timeout);
             timeout = setTimeout(function () {
                 if (!$preview.hasClass('in') && $preview.is(':visible')) return;
