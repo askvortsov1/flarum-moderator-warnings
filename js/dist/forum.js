@@ -175,7 +175,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2___default.a, 'moderationControls', function (items, post) {
     if (!flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user || !flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user.canManageWarnings()) return;
-    console.log(post);
     items.add('warning', m(flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
       icon: "fas fa-exclamation-circle",
       onclick: function onclick() {

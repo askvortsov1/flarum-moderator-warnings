@@ -9,7 +9,6 @@ export default function () {
     extend(PostControls, 'moderationControls', function (items, post) {
         if (!app.session.user || !app.session.user.canManageWarnings()) return;
 
-        console.log(post)
         items.add('warning',
             <Button
                 icon="fas fa-exclamation-circle"
