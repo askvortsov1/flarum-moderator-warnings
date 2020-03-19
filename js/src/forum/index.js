@@ -1,12 +1,14 @@
 import app from 'flarum/app';
-import addWarningPage from './addWarningPage';
-import addWarningControl from './addWarningControl';
-import addWarningsToPosts from './addWarningsToPosts';
-import Warning from './model/Warning';
+import NotificationGrid from 'flarum/components/NotificationGrid';
 import { Extend } from '@flarum/core/forum';
-import Post from 'flarum/models/Post';
+import { extend } from 'flarum/extend';
 import User from 'flarum/models/User';
 import Model from 'flarum/Model';
+import addWarningControl from './addWarningControl';
+import addWarningPage from './addWarningPage';
+import addWarningsToPosts from './addWarningsToPosts';
+import WarningNotification from './components/WarningNotification';
+import Warning from './model/Warning';
 
 app.initializers.add('askvortsov/flarum-moderator-warnings', app => {
     app.store.models.warnings = Warning;
@@ -17,6 +19,14 @@ app.initializers.add('askvortsov/flarum-moderator-warnings', app => {
     addWarningControl();
     addWarningPage();
     addWarningsToPosts();
-});
 
-export const extend = [new Extend.Model('warnings', Warning)];
+
+    app.notificationComponents.warning = WarningNotification;
+    extend(NotificationGrid.prototype, 'notificationTypes', function (items) {
+        items.add('warning', {
+            name: 'warning',
+            icon: 'fas fa-exclamation-circle',
+            label: app.translator.trans('askvortsov-moderator-warnings.forum.settings.warning_notification_label')
+        });
+    });
+});

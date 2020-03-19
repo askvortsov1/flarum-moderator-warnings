@@ -2,6 +2,9 @@
 
 namespace Askvortsov\FlarumWarnings\Api\Controller;
 
+
+use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
+use Flarum\Notification\NotificationSyncer;
 use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
 use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Api\Controller\AbstractCreateController;
@@ -16,6 +19,18 @@ class CreateWarningController extends AbstractCreateController
     use AssertPermissionTrait;
 
     public $serializer = WarningSerializer::class;
+    /**
+     * @var NotificationSyncer
+     */
+    protected $notifications;
+
+    /**
+     * @param NotificationSyncer $notifications
+     */
+    public function __construct(NotificationSyncer $notifications)
+    {
+        $this->notifications = $notifications;
+    }
 
     /**
      * {@inheritdoc}
@@ -53,6 +68,8 @@ class CreateWarningController extends AbstractCreateController
         }
 
         $warning->save();
+
+        $this->notifications->sync(new WarningBlueprint($warning), [$warning->warnedUser]);
 
         return $warning;
     }

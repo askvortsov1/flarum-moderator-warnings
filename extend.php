@@ -16,7 +16,11 @@ use Flarum\Extend;
 use Askvortsov\FlarumWarnings\Access\UserPolicy;
 use Askvortsov\FlarumWarnings\Api\Controller;
 use Askvortsov\FlarumWarnings\Listeners;
+use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
+use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
+use Flarum\Event\ConfigureNotificationTypes;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Contracts\View\Factory;
 
 return [
     (new Extend\Frontend('forum'))
@@ -34,9 +38,15 @@ return [
         ->delete('/warnings/{warning_id}', 'warnings.delete', Controller\DeleteWarningController::class)
         ->post('/warnings', 'warnings.create', Controller\CreateWarningController::class),
 
-    function (Dispatcher $events) {
+    function (Dispatcher $events, Factory $views) {
         $events->subscribe(Listeners\AddPermissionsToUserSerializer::class);
         $events->subscribe(Listeners\AddPostWarningRelationship::class);
         $events->subscribe(UserPolicy::class);
+
+        $events->listen(ConfigureNotificationTypes::class, function (ConfigureNotificationTypes $event) {
+            $event->add(WarningBlueprint::class, WarningSerializer::class, ['alert', 'email']);
+        });
+
+        $views->addNamespace('askvortsov-moderator-warnings', __DIR__.'/views');
     },
 ];
