@@ -106,6 +106,8 @@
     }
     .WarningListItem-subtitle {
         color: @text-color;
+        font-size: 14px;
+        margin: 15px 0px 5px;
     }
   }
 }
@@ -170,7 +172,7 @@
 
     .unread & {
       background: @primary-color;
-      color: #fff;
+      color: darken(#ffcccb, 10%);
       font-weight: bold;
 
       &:active {
@@ -201,6 +203,11 @@
     }
     .WarningListItem-controls.open {
       z-index: 3;
+    }
+  }
+  .WarningListItem--hidden {
+    &:hover {
+      background: mix(@control-bg, @body-bg, 50%);
     }
   }
   .WarningListItem-controls {
