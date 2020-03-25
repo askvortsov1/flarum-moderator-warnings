@@ -164,9 +164,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/utils/PostControls */ "flarum/utils/PostControls");
 /* harmony import */ var flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/Button */ "flarum/components/Button");
-/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Button__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_WarningModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/WarningModal */ "./src/forum/components/WarningModal.js");
+/* harmony import */ var flarum_utils_UserControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/utils/UserControls */ "flarum/utils/UserControls");
+/* harmony import */ var flarum_utils_UserControls__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_UserControls__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/components/Button */ "flarum/components/Button");
+/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Button__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_WarningModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/WarningModal */ "./src/forum/components/WarningModal.js");
+
 
 
 
@@ -175,15 +178,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2___default.a, 'moderationControls', function (items, post) {
     if (!flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user || !flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user.canManageWarnings()) return;
-    items.add('warning', m(flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    items.add('warning', m(flarum_components_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
       icon: "fas fa-exclamation-circle",
       onclick: function onclick() {
-        return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.modal.show(new _components_WarningModal__WEBPACK_IMPORTED_MODULE_4__["default"]({
+        return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.modal.show(new _components_WarningModal__WEBPACK_IMPORTED_MODULE_5__["default"]({
           callback: function callback() {
             location.reload();
           },
           user: post.user(),
           post: post
+        }));
+      }
+    }, flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-moderator-warnings.forum.post_controls.warning_button')));
+  });
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_utils_UserControls__WEBPACK_IMPORTED_MODULE_3___default.a, 'moderationControls', function (items, user) {
+    if (!flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user || !flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user.canManageWarnings()) return;
+    items.add('warning', m(flarum_components_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      icon: "fas fa-exclamation-circle",
+      onclick: function onclick() {
+        return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.modal.show(new _components_WarningModal__WEBPACK_IMPORTED_MODULE_5__["default"]({
+          callback: function callback() {
+            location.reload();
+          },
+          user: user
         }));
       }
     }, flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-moderator-warnings.forum.post_controls.warning_button')));
@@ -1555,6 +1572,17 @@ module.exports = flarum.core.compat['utils/ItemList'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['utils/PostControls'];
+
+/***/ }),
+
+/***/ "flarum/utils/UserControls":
+/*!***********************************************************!*\
+  !*** external "flarum.core.compat['utils/UserControls']" ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['utils/UserControls'];
 
 /***/ }),
 
