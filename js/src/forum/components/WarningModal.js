@@ -16,10 +16,11 @@ export default class WarningModal extends Modal {
     }
 
     title() {
-        return app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.create-heading');
+        return app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.heading', { username: username(this.props.user) });
     }
 
     content() {
+        console.log
         return (
             <div className="Modal-body">
                 <div className="Form Form--centered">

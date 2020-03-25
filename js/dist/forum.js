@@ -895,10 +895,13 @@ var WarningModal = /*#__PURE__*/function (_Modal) {
   };
 
   _proto.title = function title() {
-    return app.translator.trans('askvortsov-moderator-warnings.forum.Warnings.create-heading');
+    return app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.heading', {
+      username: flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default()(this.props.user)
+    });
   };
 
   _proto.content = function content() {
+    console.log;
     return m("div", {
       className: "Modal-body"
     }, m("div", {
