@@ -31,7 +31,7 @@ export default class WarningModal extends Modal {
                                     type="number"
                                     className="FormControl"
                                     value={this.strikes()}
-                                    min="0" max="5" required={true}
+                                    min="0" max="5"
                                     oninput={m.withAttr('value', this.strikes)}>
                                 </input>
                             </label>
@@ -82,6 +82,10 @@ export default class WarningModal extends Modal {
         e.preventDefault();
 
         this.loading = true;
+
+        if (!this.strikes()) {
+            this.strikes(0);
+        }
 
         const newWarning = {
             userId: this.props.user.id(),

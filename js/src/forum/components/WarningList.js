@@ -25,7 +25,9 @@ export default class WarningList extends Component {
 
     return (
       <div className="WarningList">
-        <h1 className="WarningList-warnings">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings', { strikes: this.strikeCount() })}</h1>
+        <h1 className="WarningList-warnings">{this.strikeCount() ?
+          app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings', { strikes: this.strikeCount() }) :
+          app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes')}</h1>
         <div class="Warnings-toolbar">
           <ul className="Warnings-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
         </div>

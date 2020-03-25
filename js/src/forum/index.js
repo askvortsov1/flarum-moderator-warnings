@@ -15,7 +15,7 @@ app.initializers.add('askvortsov/flarum-moderator-warnings', app => {
     User.prototype.canViewWarnings = Model.attribute('canViewWarnings');
     User.prototype.canManageWarnings = Model.attribute('canManageWarnings');
     User.prototype.canDeleteWarnings = Model.attribute('canDeleteWarnings');
-    User.prototype.strikeCount = Model.attribute('strikeCount');
+    User.prototype.visibleWarningCount = Model.attribute('visibleWarningCount');
     addWarningControl();
     addWarningPage();
     addWarningsToPosts();

@@ -7,7 +7,7 @@ export default function () {
     app.routes['user.warnings'] = { path: '/u/:username/warnings', component: WarningPage.component() };
 
     extend(UserPage.prototype, 'navItems', function (items) {
-        if (app.session.user && (app.session.user.canViewWarnings() || this.user.id() === app.session.user.id())) {
+        if (app.session.user && (app.session.user.canViewWarnings() || this.user.id() === app.session.user.id() && this.user.visibleWarningCount() > 0)) {
             items.add(
                 'warnings',
                 LinkButton.component({
