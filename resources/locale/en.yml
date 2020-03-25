@@ -12,7 +12,7 @@ askvortsov-moderator-warnings:
       warning: Warned with {strikes} strikes by {mod_username}
       warning_no_strikes: Warned with no strikes by {mod_username}
     post_controls:
-      warning_button: Apply Warning
+      warning_button: Warn User
     user:
       warnings: Moderator Warnings
     settings:
