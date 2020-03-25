@@ -55,6 +55,7 @@
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: underline;
 
   .WarningList:not(.WarningList--searchResults) .read & {
     color: mix(@heading-color, @body-bg, 55%);
@@ -172,7 +173,7 @@
 
     .unread & {
       background: @primary-color;
-      color: darken(#ffcccb, 10%);
+      color: #fff;
       font-weight: bold;
 
       &:active {
@@ -207,7 +208,7 @@
   }
   .WarningListItem--hidden {
     &:hover {
-      background: mix(@control-bg, @body-bg, 50%);
+      background: darken(#ffcccb, 10%);
     }
   }
   .WarningListItem-controls {
@@ -229,6 +230,7 @@
   .WarningListItem-info {
     .item-excerpt {
       margin-right: 170px;
+      color: @text-color;
     }
   }
   .WarningListItem-content {
