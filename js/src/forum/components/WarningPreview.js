@@ -23,12 +23,12 @@ export default class WarningPreview extends Component {
                     {formatedDate}
                     <br />
                     <ul className="WarningListItem-info">
-                        <li>
+                        <li class="item-excerpt">
                             <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.public_comment')}</h4>
                             <span>{this.warning.public_comment()}</span>
                         </li>
                         {app.session.user.canManageWarnings() ?
-                            <li>
+                            <li class="item-excerpt">
                                 <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.private_comment')}</h4>
                                 <span>{this.warning.private_comment()}</span>
                             </li> : ''}

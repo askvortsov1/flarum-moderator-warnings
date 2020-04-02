@@ -1190,9 +1190,13 @@ var WarningPreview = /*#__PURE__*/function (_Component) {
       mod_username: flarum_helpers_username__WEBPACK_IMPORTED_MODULE_3___default()(this.warning.addedByUser())
     })), formatedDate, m("br", null), m("ul", {
       className: "WarningListItem-info"
-    }, m("li", null, m("h4", {
+    }, m("li", {
+      "class": "item-excerpt"
+    }, m("h4", {
       className: "WarningListItem-subtitle"
-    }, app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.public_comment')), m("span", null, this.warning.public_comment())), app.session.user.canManageWarnings() ? m("li", null, m("h4", {
+    }, app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.public_comment')), m("span", null, this.warning.public_comment())), app.session.user.canManageWarnings() ? m("li", {
+      "class": "item-excerpt"
+    }, m("h4", {
       className: "WarningListItem-subtitle"
     }, app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.private_comment')), m("span", null, this.warning.private_comment())) : '')));
   };
