@@ -23,6 +23,8 @@ class UserPolicy extends AbstractPolicy
     {
         if ($ability == 'user.viewWarnings' && $actor->id == $user->id) {
             return true;
+        } elseif ($ability == 'user.viewWarnings') {
+            return $actor->can('user.viewWarnings');
         }
     }
 }

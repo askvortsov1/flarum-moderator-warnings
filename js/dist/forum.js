@@ -729,13 +729,10 @@ var WarningList = /*#__PURE__*/function (_Component) {
   _proto.refresh = function refresh() {
     var _this = this;
 
-    return flarum_app__WEBPACK_IMPORTED_MODULE_3___default.a.store.find('warnings', this.user.id()).then(function (results) {
+    return flarum_app__WEBPACK_IMPORTED_MODULE_3___default.a.store.find('warnings', this.user.id())["catch"](function () {}).then(function (results) {
       _this.warnings = [];
 
       _this.parseResults(results);
-    }, function () {
-      _this.loading = false;
-      m.redraw();
     });
   };
 
@@ -1069,14 +1066,16 @@ var WarningPage = /*#__PURE__*/function (_UserPage) {
   };
 
   _proto.content = function content() {
-    return m("div", {
-      className: "WarningsUserPage"
-    }, _WarningList__WEBPACK_IMPORTED_MODULE_2__["default"].component({
-      params: {
-        user: this.user,
-        sort: 'newest'
-      }
-    }));
+    if (app.session.user && (app.session.user.canViewWarnings() || this.user.id() === app.session.user.id() && this.user.visibleWarningCount() > 0)) {
+      return m("div", {
+        className: "WarningsUserPage"
+      }, _WarningList__WEBPACK_IMPORTED_MODULE_2__["default"].component({
+        params: {
+          user: this.user,
+          sort: 'newest'
+        }
+      }));
+    }
   };
 
   return WarningPage;

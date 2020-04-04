@@ -8,15 +8,17 @@ export default class WarningPage extends UserPage {
     }
 
     content() {
-        return (
-            <div className="WarningsUserPage">
-                {WarningList.component({
-                    params: {
-                        user: this.user,
-                        sort: 'newest',
-                    },
-                })}
-            </div>
-        );
+        if (app.session.user && (app.session.user.canViewWarnings() || this.user.id() === app.session.user.id() && this.user.visibleWarningCount() > 0)) {
+            return (
+                <div className="WarningsUserPage">
+                    {WarningList.component({
+                        params: {
+                            user: this.user,
+                            sort: 'newest',
+                        },
+                    })}
+                </div>
+            );
+        }
     }
 }

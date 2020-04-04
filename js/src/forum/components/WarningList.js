@@ -78,16 +78,14 @@ export default class WarningList extends Component {
   }
 
   refresh() {
-    return app.store.find('warnings', this.user.id()).then(
-      results => {
-        this.warnings = [];
-        this.parseResults(results);
-      },
-      () => {
-        this.loading = false;
-        m.redraw();
-      }
-    );
+    return app.store.find('warnings', this.user.id())
+      .catch(() => {})
+      .then(
+        results => {
+          this.warnings = [];
+          this.parseResults(results);
+        }
+      );
   }
 
   handleOnClickCreate(e) {
