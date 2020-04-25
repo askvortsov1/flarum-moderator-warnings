@@ -27,8 +27,8 @@ askvortsov-moderator-warnings:
       warnings: "Moderator Warnings: {strikes} Strike Received|Moderator Warnings: {strikes} Strikes Received"
       warnings_no_strikes: "Moderator Warnings: No Strikes Received"
     warning_list_item:
-      list_item_heading: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes
-      list_item_heading_hidden: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes <strong>(removed)</strong>
+      list_item_heading: '<strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strike|<strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes'
+      list_item_heading_hidden: '<strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strike <strong>(removed)</strong>|<strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes <strong>(removed)</strong>'
       public_comment: User-Visible Comments
       private_comment: Moderator-Visible Comments
       linked_post: Linked Post
