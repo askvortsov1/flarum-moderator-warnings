@@ -26,8 +26,8 @@ export default class WarningListItem extends Component {
         <div className="WarningListItem-main">
           <h3 className="WarningListItem-title">
             {warning.isHidden() ?
-              app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading_hidden', { mod_username: username(addedByUser), strikes: warning.strikes() })
-              : app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading', { mod_username: username(addedByUser), strikes: warning.strikes() })}</h3>
+              app.translator.transChoice('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading_hidden', warning.strikes(), { mod_username: username(addedByUser), strikes: warning.strikes() })
+              : app.translator.transChoice('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading', warning.strikes(), { mod_username: username(addedByUser), strikes: warning.strikes() })}</h3>
           {formatedDate}
           <br />
           <ul className="WarningListItem-info">
