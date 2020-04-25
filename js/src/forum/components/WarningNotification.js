@@ -17,7 +17,7 @@ export default class WarningNotification extends Notification {
         const warning = this.props.notification.subject();
 
         if (warning.strikes()) {
-            return app.translator.trans('askvortsov-moderator-warnings.forum.notifications.warning_text', {
+            return app.translator.transChoice('askvortsov-moderator-warnings.forum.notifications.warning_text', warning.strikes(), {
                 mod_username: username(this.props.notification.fromUser()),
                 strikes: warning.strikes()
             });
