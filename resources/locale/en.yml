@@ -6,10 +6,10 @@ askvortsov-moderator-warnings:
       delete_warnings: Permanently delete moderator warnings
   forum:
     notifications:
-      warning_text: You were warned with {strikes} strikes by {mod_username}
+      warning_text: 'You were warned with {strikes} strike by {mod_username}|You were warned with {strikes} strikes by {mod_username}'
       warning_no_strikes_text: You were warned by {mod_username} (no strikes)
     post:
-      warning: Warned with {strikes} strikes by {mod_username}
+      warning: 'Warned with {strikes} strike by {mod_username}|Warned with {strikes} strikes by {mod_username}'
       warning_no_strikes: Warned with no strikes by {mod_username}
     post_controls:
       warning_button: Warn User
