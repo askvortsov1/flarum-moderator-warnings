@@ -24,7 +24,7 @@ askvortsov-moderator-warnings:
     warning_list:
       add_button: New warning
       no-warnings: It looks like there are no warnings here.
-      warnings: "Moderator Warnings: {strikes} Strikes Received"
+      warnings: "Moderator Warnings: {strikes} Strike Received|Moderator Warnings: {strikes} Strikes Received"
       warnings_no_strikes: "Moderator Warnings: No Strikes Received"
     warning_list_item:
       list_item_heading: <strong>{mod_username}</strong> warned with <strong>{strikes}</strong> strikes
