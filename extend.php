@@ -13,11 +13,13 @@ namespace Askvortsov\FlarumWarnings;
 
 
 use Flarum\Extend;
+use Flarum\Post\Post;
 use Askvortsov\FlarumWarnings\Access\UserPolicy;
 use Askvortsov\FlarumWarnings\Api\Controller;
 use Askvortsov\FlarumWarnings\Listeners;
 use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
 use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
+use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Event\ConfigureNotificationTypes;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\View\Factory;
@@ -37,6 +39,9 @@ return [
         ->patch('/warnings/{warning_id}', 'warnings.update', Controller\UpdateWarningController::class)
         ->delete('/warnings/{warning_id}', 'warnings.delete', Controller\DeleteWarningController::class)
         ->post('/warnings', 'warnings.create', Controller\CreateWarningController::class),
+
+    (new Extend\Model(Post::class))
+        ->hasMany('warnings', Warning::class, 'post_id'),
 
     function (Dispatcher $events, Factory $views) {
         $events->subscribe(Listeners\AddPermissionsToUserSerializer::class);

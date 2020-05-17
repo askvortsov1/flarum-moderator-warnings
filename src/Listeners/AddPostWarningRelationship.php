@@ -19,20 +19,8 @@ class AddPostWarningRelationship
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(GetModelRelationship::class, [$this, 'getModelRelationship']);
         $events->listen(GetApiRelationship::class, [$this, 'getApiRelationship']);
         $events->listen(WillGetData::class, [$this, 'includeRelationships']);
-    }
-
-    /**
-     * @param GetModelRelationship $event
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|null
-     */
-    public function getModelRelationship(GetModelRelationship $event)
-    {
-        if ($event->isRelationship(Post::class, 'warnings')) {
-            return $event->model->hasMany(Warning::class, 'post_id');
-        }
     }
 
     /**
