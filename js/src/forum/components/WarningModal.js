@@ -1,3 +1,4 @@
+import Alert from "flarum/components/Alert";
 import Modal from "flarum/components/Modal";
 import Button from "flarum/components/Button";
 import username from "flarum/helpers/username";
@@ -100,6 +101,8 @@ export default class WarningModal extends Modal {
   onsubmit(e) {
     e.preventDefault();
 
+    app.alerts.dismiss(this.successAlert);
+
     this.loading = true;
 
     if (!this.strikes()) {
@@ -121,6 +124,7 @@ export default class WarningModal extends Modal {
       .createRecord("warnings")
       .save(newWarning)
       .then(this.hide.bind(this))
+      .then(app.alerts.show((this.successAlert = new Alert({ type: 'success', children: app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.confirmation_message') }))))
       .then(this.props.callback)
       .catch(() => {});
   }

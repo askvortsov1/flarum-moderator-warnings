@@ -52,7 +52,7 @@ export default class WarningList extends Component {
           {!this.loading && this.warnings.length === 0 && (
             <label>
               {app.translator.trans(
-                "askvortsov-moderator-warnings.forum.warning_list.no-warnings"
+                "askvortsov-moderator-warnings.forum.warning_list.no_warnings"
               )}
             </label>
           )}

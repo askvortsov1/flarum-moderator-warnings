@@ -55,7 +55,7 @@ class CreateWarningController extends AbstractCreateController
             $warning->post_id = $requestData['post']['data']['id'];
         }
 
-        if ($warning->public_comment === '') {
+        if (trim($warning->public_comment) === '') {
             throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.validation.public_comment_required')]);
         }
 
