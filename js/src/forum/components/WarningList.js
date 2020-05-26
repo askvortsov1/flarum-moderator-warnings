@@ -1,11 +1,11 @@
-import Component from 'flarum/Component';
-import app from 'flarum/app';
-import LoadingIndicator from 'flarum/components/LoadingIndicator';
-import WarningListItem from './WarningListItem';
-import Button from 'flarum/components/Button';
-import WarningModal from './WarningModal';
-import listItems from 'flarum/helpers/listItems';
-import ItemList from 'flarum/utils/ItemList';
+import Component from "flarum/Component";
+import app from "flarum/app";
+import LoadingIndicator from "flarum/components/LoadingIndicator";
+import WarningListItem from "./WarningListItem";
+import Button from "flarum/components/Button";
+import WarningModal from "./WarningModal";
+import listItems from "flarum/helpers/listItems";
+import ItemList from "flarum/utils/ItemList";
 
 export default class WarningList extends Component {
   init() {
@@ -25,14 +25,24 @@ export default class WarningList extends Component {
 
     return (
       <div className="WarningList">
-        <h1 className="WarningList-warnings">{this.strikeCount() ?
-          app.translator.transChoice('askvortsov-moderator-warnings.forum.warning_list.warnings', this.strikeCount(), { strikes: this.strikeCount() }) :
-          app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes')}</h1>
+        <h1 className="WarningList-warnings">
+          {this.strikeCount()
+            ? app.translator.transChoice(
+                "askvortsov-moderator-warnings.forum.warning_list.warnings",
+                this.strikeCount(),
+                { strikes: this.strikeCount() }
+              )
+            : app.translator.trans(
+                "askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes"
+              )}
+        </h1>
         <div class="Warnings-toolbar">
-          <ul className="Warnings-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
+          <ul className="Warnings-toolbar-action">
+            {listItems(this.actionItems().toArray())}
+          </ul>
         </div>
         <ul className="WarningList-Warnings">
-          {this.warnings.map(warning => {
+          {this.warnings.map((warning) => {
             return (
               <li key={warning.id()} data-id={warning.id()}>
                 {WarningListItem.component({ warning })}
@@ -40,7 +50,11 @@ export default class WarningList extends Component {
             );
           })}
           {!this.loading && this.warnings.length === 0 && (
-            <label>{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.no-warnings')}</label>
+            <label>
+              {app.translator.trans(
+                "askvortsov-moderator-warnings.forum.warning_list.no-warnings"
+              )}
+            </label>
           )}
         </ul>
         <div className="WarningList-loadMore">{loading}</div>
@@ -53,10 +67,12 @@ export default class WarningList extends Component {
 
     if (app.session.user.canManageWarnings()) {
       items.add(
-        'create_warning',
+        "create_warning",
         Button.component({
-          children: app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.add_button'),
-          className: 'Button Button--primary',
+          children: app.translator.trans(
+            "askvortsov-moderator-warnings.forum.warning_list.add_button"
+          ),
+          className: "Button Button--primary",
           onclick: this.handleOnClickCreate.bind(this),
         })
       );
@@ -66,7 +82,10 @@ export default class WarningList extends Component {
   }
 
   strikeCount() {
-    return this.warnings.filter(warning => !warning.isHidden()).map(warning => warning.strikes()).reduce((a,b) => a + b, 0);
+    return this.warnings
+      .filter((warning) => !warning.isHidden())
+      .map((warning) => warning.strikes())
+      .reduce((a, b) => a + b, 0);
   }
 
   parseResults(results) {
@@ -78,14 +97,13 @@ export default class WarningList extends Component {
   }
 
   refresh() {
-    return app.store.find('warnings', this.user.id())
+    return app.store
+      .find("warnings", this.user.id())
       .catch(() => {})
-      .then(
-        results => {
-          this.warnings = [];
-          this.parseResults(results);
-        }
-      );
+      .then((results) => {
+        this.warnings = [];
+        this.parseResults(results);
+      });
   }
 
   handleOnClickCreate(e) {

@@ -1,10 +1,10 @@
-import Component from 'flarum/Component';
-import username from 'flarum/helpers/username';
-import fullTime from 'flarum/helpers/fullTime';
-import classList from 'flarum/utils/classList';
-import Dropdown from 'flarum/components/Dropdown';
-import WarningPost from './WarningPost';
-import WarningControls from './WarningControls';
+import Component from "flarum/Component";
+import username from "flarum/helpers/username";
+import fullTime from "flarum/helpers/fullTime";
+import classList from "flarum/utils/classList";
+import Dropdown from "flarum/components/Dropdown";
+import WarningPost from "./WarningPost";
+import WarningControls from "./WarningControls";
 
 export default class WarningListItem extends Component {
   view() {
@@ -17,34 +17,70 @@ export default class WarningListItem extends Component {
 
     return (
       <div {...attrs}>
-        {controls.length ? Dropdown.component({
-          icon: 'fas fa-ellipsis-v',
-          children: controls,
-          className: 'WarningListItem-controls',
-          buttonClassName: 'Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right'
-        }) : ''}
+        {controls.length
+          ? Dropdown.component({
+              icon: "fas fa-ellipsis-v",
+              children: controls,
+              className: "WarningListItem-controls",
+              buttonClassName:
+                "Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right",
+            })
+          : ""}
         <div className="WarningListItem-main">
           <h3 className="WarningListItem-title">
-            {warning.isHidden() ?
-              app.translator.transChoice('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading_hidden', warning.strikes(), { mod_username: username(addedByUser), strikes: warning.strikes() })
-              : app.translator.transChoice('askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading', warning.strikes(), { mod_username: username(addedByUser), strikes: warning.strikes() })}</h3>
+            {warning.isHidden()
+              ? app.translator.transChoice(
+                  "askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading_hidden",
+                  warning.strikes(),
+                  {
+                    mod_username: username(addedByUser),
+                    strikes: warning.strikes(),
+                  }
+                )
+              : app.translator.transChoice(
+                  "askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading",
+                  warning.strikes(),
+                  {
+                    mod_username: username(addedByUser),
+                    strikes: warning.strikes(),
+                  }
+                )}
+          </h3>
           {formatedDate}
           <br />
           <ul className="WarningListItem-info">
-            {warning.post() ?
+            {warning.post() ? (
               <li className="item-excerpt">
-                <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.linked_post')}</h4>
+                <h4 className="WarningListItem-subtitle">
+                  {app.translator.trans(
+                    "askvortsov-moderator-warnings.forum.warning_list_item.linked_post"
+                  )}
+                </h4>
                 {WarningPost.component({ post: warning.post() })}
-              </li> : ''}
+              </li>
+            ) : (
+              ""
+            )}
             <li className="item-excerpt">
-              <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.public_comment')}</h4>
+              <h4 className="WarningListItem-subtitle">
+                {app.translator.trans(
+                  "askvortsov-moderator-warnings.forum.warning_list_item.public_comment"
+                )}
+              </h4>
               <span>{warning.public_comment()}</span>
             </li>
-            {app.session.user.canManageWarnings() ?
+            {app.session.user.canManageWarnings() ? (
               <li className="item-excerpt">
-                <h4 className="WarningListItem-subtitle">{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list_item.private_comment')}</h4>
+                <h4 className="WarningListItem-subtitle">
+                  {app.translator.trans(
+                    "askvortsov-moderator-warnings.forum.warning_list_item.private_comment"
+                  )}
+                </h4>
                 <span>{warning.private_comment()}</span>
-              </li> : ''}
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </div>
@@ -55,10 +91,13 @@ export default class WarningListItem extends Component {
     const { warning } = this.props;
     const attrs = {};
 
-    attrs.className = (attrs.className || '') + ' ' + classList({
-      'WarningListItem': true,
-      'WarningListItem--hidden': warning.isHidden(),
-    });
+    attrs.className =
+      (attrs.className || "") +
+      " " +
+      classList({
+        WarningListItem: true,
+        "WarningListItem--hidden": warning.isHidden(),
+      });
 
     return attrs;
   }
