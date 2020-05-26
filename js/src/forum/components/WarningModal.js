@@ -124,7 +124,16 @@ export default class WarningModal extends Modal {
       .createRecord("warnings")
       .save(newWarning)
       .then(this.hide.bind(this))
-      .then(app.alerts.show((this.successAlert = new Alert({ type: 'success', children: app.translator.trans('askvortsov-moderator-warnings.forum.warning_modal.confirmation_message') }))))
+      .then(
+        app.alerts.show(
+          (this.successAlert = new Alert({
+            type: "success",
+            children: app.translator.trans(
+              "askvortsov-moderator-warnings.forum.warning_modal.confirmation_message"
+            ),
+          }))
+        )
+      )
       .then(this.props.callback)
       .catch(() => {});
   }
