@@ -90,7 +90,7 @@
     0 3px 10px 0 rgba(0, 0, 0, 0.07);
 
   &:hover {
-    background: mix(@control-bg, @body-bg, 60%);
+    background: mix(@control-bg, @body-bg, 70%);
   }
 
   &:hover .WarningListItem-controls,
@@ -100,6 +100,14 @@
 
   .WarningListItem-controls.open {
     z-index: 3;
+  }
+}
+
+.WarningListItem.WarningListItem--hidden {
+  background: mix(@control-danger-bg, @body-bg, 40%);
+
+  &:hover {
+    background: mix(@control-danger-bg, @body-bg, 70%);
   }
 }
 
