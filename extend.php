@@ -18,6 +18,7 @@ use Askvortsov\FlarumWarnings\Model\Warning;
 use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
 use Flarum\Event\ConfigureNotificationTypes;
 use Flarum\Extend;
+use Flarum\Foundation\Application;
 use Flarum\Post\Post;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\View\Factory;
@@ -51,5 +52,9 @@ return [
         });
 
         $views->addNamespace('askvortsov-moderator-warnings', __DIR__.'/views');
+    },
+
+    function (Application $app) {
+        Warning::setFormatter($app['flarum.formatter']);
     },
 ];

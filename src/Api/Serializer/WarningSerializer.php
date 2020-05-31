@@ -11,22 +11,15 @@
 
 namespace Askvortsov\FlarumWarnings\Api\Serializer;
 
+use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\BasicUserSerializer;
 use Flarum\Api\Serializer\PostSerializer;
 use Flarum\Post\Post;
-use Flarum\Formatter\Formatter;
 
 class WarningSerializer extends AbstractSerializer
 {
     protected $type = 'warnings';
-
-    protected $formatter;
-
-    public function __construct(Formatter $formatter)
-    {
-        $this->formatter = $formatter;
-    }
 
     /**
      * {@inheritdoc}
@@ -51,7 +44,7 @@ class WarningSerializer extends AbstractSerializer
 
     protected function format($text)
     {
-        return $this->formatter->render($this->formatter->parse($text), new Post());
+        return Warning::getFormatter()->render(Warning::getFormatter()->parse($text), new Post());
     }
 
     protected function warnedUser($warnings)
