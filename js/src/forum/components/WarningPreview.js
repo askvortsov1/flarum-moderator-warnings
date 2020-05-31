@@ -38,7 +38,7 @@ export default class WarningPreview extends Component {
                   "askvortsov-moderator-warnings.forum.warning_list_item.public_comment"
                 )}
               </h4>
-              <span>{this.warning.public_comment()}</span>
+              <p>{m.trust(this.warning.public_comment())}</p>
             </li>
             {app.session.user.canManageWarnings() ? (
               <li class="item-excerpt">
@@ -47,7 +47,7 @@ export default class WarningPreview extends Component {
                     "askvortsov-moderator-warnings.forum.warning_list_item.private_comment"
                   )}
                 </h4>
-                <span>{this.warning.private_comment()}</span>
+                <p>{m.trust(this.warning.private_comment())}</p>
               </li>
             ) : (
               ""

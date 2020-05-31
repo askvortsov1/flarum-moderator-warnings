@@ -37,7 +37,6 @@ class Warning extends AbstractModel
         return $this->hasOne(Post::class, 'id', 'post_id');
     }
 
-
     public static function strikesForUser($user)
     {
         return self::where('user_id', $user->id)->get()->filter(function ($warning) {

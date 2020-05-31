@@ -5,10 +5,18 @@ namespace Askvortsov\FlarumWarnings\Api\Serializer;
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\BasicUserSerializer;
 use Flarum\Api\Serializer\PostSerializer;
+use Flarum\Formatter\Formatter;
 
 class WarningSerializer extends AbstractSerializer
 {
     protected $type = 'warnings';
+
+    protected $formatter;
+
+    public function __construct(Formatter $formatter)
+    {
+        $this->formatter = $formatter;
+    }
 
     /**
      * @inheritDoc
@@ -18,17 +26,21 @@ class WarningSerializer extends AbstractSerializer
         $attributes = [
             'id'               => $warnings->id,
             'userId'           => $warnings->user_id,
-            'public_comment'   => $warnings->public_comment,
+            'public_comment'   => $this->format($warnings->public_comment),
             'strikes'          => $warnings->strikes,
             'createdAt'        => $this->formatDate($warnings->created_at),
             'hiddenAt'         => $this->formatDate($warnings->hidden_at),
         ];
 
         if ($this->actor->can('user.manageWarnings')) {
-            $attributes['private_comment'] = $warnings->private_comment;
+            $attributes['private_comment'] = $this->format($warnings->private_comment);
         }
 
         return $attributes;
+    }
+
+    protected function format($text) {
+        return $this->formatter->render($this->formatter->parse($text));
     }
 
     protected function warnedUser($warnings)
