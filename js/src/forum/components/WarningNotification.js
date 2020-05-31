@@ -22,7 +22,7 @@ export default class WarningNotification extends Notification {
         warning.strikes(),
         {
           mod_username: username(this.props.notification.fromUser()),
-          strikes: warning.strikes(),
+          strikes: warning.strikes() || "0",
         }
       );
     } else {

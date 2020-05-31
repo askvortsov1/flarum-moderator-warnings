@@ -34,7 +34,7 @@ export default class WarningListItem extends Component {
                   warning.strikes(),
                   {
                     mod_username: username(addedByUser),
-                    strikes: warning.strikes(),
+                    strikes: warning.strikes() || "0",
                   }
                 )
               : app.translator.transChoice(
@@ -42,7 +42,7 @@ export default class WarningListItem extends Component {
                   warning.strikes(),
                   {
                     mod_username: username(addedByUser),
-                    strikes: warning.strikes(),
+                    strikes: warning.strikes() || "0",
                   }
                 )}
           </h3>

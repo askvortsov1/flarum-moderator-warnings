@@ -30,7 +30,7 @@ export default class WarningList extends Component {
             ? app.translator.transChoice(
                 "askvortsov-moderator-warnings.forum.warning_list.warnings",
                 this.strikeCount(),
-                { strikes: this.strikeCount() }
+                { strikes: this.strikeCount() || "0" }
               )
             : app.translator.trans(
                 "askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes"

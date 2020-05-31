@@ -20,7 +20,7 @@ export default class PostWarning extends Component {
                 "askvortsov-moderator-warnings.forum.post.warning",
                 this.warning.strikes(),
                 {
-                  strikes: this.warning.strikes(),
+                  strikes: this.warning.strikes() || "0",
                   mod_username: username(this.warning.addedByUser()),
                 }
               )

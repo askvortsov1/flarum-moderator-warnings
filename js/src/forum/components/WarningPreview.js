@@ -10,6 +10,7 @@ export default class WarningPreview extends Component {
   }
 
   view() {
+    console.log(this.warning.strikes());
     const formatedDate = fullTime(this.warning.createdAt());
     return (
       <a
@@ -21,10 +22,11 @@ export default class WarningPreview extends Component {
       >
         <div className="WarningListItem-main">
           <h3 className="WarningListItem-title">
-            {app.translator.trans(
+            {app.translator.transChoice(
               "askvortsov-moderator-warnings.forum.post.warning",
+              this.warning.strikes(),
               {
-                strikes: this.warning.strikes(),
+                strikes: this.warning.strikes() || "0",
                 mod_username: username(this.warning.addedByUser()),
               }
             )}
