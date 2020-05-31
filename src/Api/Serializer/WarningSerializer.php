@@ -44,7 +44,7 @@ class WarningSerializer extends AbstractSerializer
 
     protected function format($text)
     {
-        return Warning::getFormatter()->render(Warning::getFormatter()->parse($text), new Post());
+        return Warning::getFormatter()->render($text, new Post());
     }
 
     protected function warnedUser($warnings)

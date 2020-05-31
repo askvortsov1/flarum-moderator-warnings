@@ -16,7 +16,9 @@ use Askvortsov\FlarumWarnings\Model\Warning;
 use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
 use Flarum\Api\Controller\AbstractCreateController;
 use Flarum\Foundation\ValidationException;
+use Flarum\Locale\Translator;
 use Flarum\Notification\NotificationSyncer;
+use Flarum\Post\Post;
 use Flarum\User\AssertPermissionTrait;
 use Illuminate\Support\Carbon;
 use Psr\Http\Message\ServerRequestInterface;
@@ -33,11 +35,17 @@ class CreateWarningController extends AbstractCreateController
     protected $notifications;
 
     /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * @param NotificationSyncer $notifications
      */
-    public function __construct(NotificationSyncer $notifications)
+    public function __construct(NotificationSyncer $notifications, Translator $translator)
     {
         $this->notifications = $notifications;
+        $this->translator = $translator;
     }
 
     /**
@@ -48,23 +56,24 @@ class CreateWarningController extends AbstractCreateController
         $actor = $request->getAttribute('actor');
         $this->assertCan($actor, 'user.manageWarnings');
 
-        $requestBody = $request->getParsedBody();
-        $requestData = $requestBody['data']['attributes'];
+        $requestData = $request->getParsedBody()['data']['attributes'];
+
+        $publicComment = $requestData['public_comment'];
+
+        if (trim($publicComment) === '') {
+            throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.validation.public_comment_required')]);
+        }
 
         $warning = new Warning();
         $warning->user_id = $requestData['userId'];
-        $warning->public_comment = $requestData['public_comment'];
-        $warning->private_comment = $requestData['private_comment'];
+        $warning->public_comment = Warning::getFormatter()->parse($publicComment, new Post());
+        $warning->private_comment = Warning::getFormatter()->parse($requestData['private_comment'], new Post());
         $warning->strikes = $requestData['strikes'];
         $warning->created_user_id = $actor->id;
         $warning->created_at = Carbon::now();
 
         if (array_key_exists('post', $requestData)) {
             $warning->post_id = $requestData['post']['data']['id'];
-        }
-
-        if (trim($warning->public_comment) === '') {
-            throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.validation.public_comment_required')]);
         }
 
         if (!$warning->strikes) {
