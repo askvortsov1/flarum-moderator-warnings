@@ -14,6 +14,7 @@ namespace Askvortsov\FlarumWarnings\Api\Serializer;
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\BasicUserSerializer;
 use Flarum\Api\Serializer\PostSerializer;
+use Flarum\Post\Post;
 use Flarum\Formatter\Formatter;
 
 class WarningSerializer extends AbstractSerializer
@@ -50,7 +51,7 @@ class WarningSerializer extends AbstractSerializer
 
     protected function format($text)
     {
-        return $this->formatter->render($this->formatter->parse($text));
+        return $this->formatter->render($this->formatter->parse($text), new Post());
     }
 
     protected function warnedUser($warnings)
