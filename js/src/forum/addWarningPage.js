@@ -20,9 +20,18 @@ export default function () {
         "warnings",
         LinkButton.component({
           href: app.route("user.warnings", { username: this.user.username() }),
-          children: app.translator.trans(
-            "askvortsov-moderator-warnings.forum.user.warnings"
-          ),
+          children: [
+            app.translator.trans(
+              "askvortsov-moderator-warnings.forum.user.warnings"
+            ),
+            this.user.visibleWarningCount() > 0 ? (
+              <span className="Button-badge">
+                {this.user.visibleWarningCount()}
+              </span>
+            ) : (
+              ""
+            ),
+          ],
           icon: "fas fa-exclamation-circle",
         }),
         10
