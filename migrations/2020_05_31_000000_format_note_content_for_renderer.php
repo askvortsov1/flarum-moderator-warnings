@@ -16,11 +16,13 @@ return [
     'up' => function (Builder $schema) {
         $formatter = Warning::getFormatter();
 
-        foreach (Warning::get() as $warning) {
-            $warning->public_comment = $formatter->parse($warning->public_comment);
-            $warning->private_comment = $formatter->parse($warning->private_comment);
-            $warning->save();
-        }
+        Warning::chunkById(1000, function ($warnings) use ($formatter) {
+            foreach ($warnings as $warning) {
+                $warning->public_comment = $formatter->parse($warning->public_comment);
+                $warning->private_comment = $formatter->parse($warning->private_comment);
+                $warning->save();
+            }
+        });
     },
 
     'down' => function (Builder $schema) {
