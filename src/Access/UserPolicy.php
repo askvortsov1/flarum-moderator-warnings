@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-moderator-warnings
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumWarnings\Access;
 
-use Askvortsov\FlarumWarnings\Model\Warning;
 use Flarum\User\AbstractPolicy;
 use Flarum\User\User;
 
@@ -17,6 +25,7 @@ class UserPolicy extends AbstractPolicy
      * @param User $actor
      * @param $ability
      * @param User $user
+     *
      * @return bool|null
      */
     public function can(User $actor, $ability, User $user)

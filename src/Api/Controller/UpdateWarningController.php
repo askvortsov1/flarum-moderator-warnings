@@ -1,12 +1,21 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-moderator-warnings
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumWarnings\Api\Controller;
 
-use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
-use Flarum\Notification\NotificationSyncer;
 use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
 use Askvortsov\FlarumWarnings\Model\Warning;
+use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
 use Flarum\Api\Controller\AbstractCreateController;
+use Flarum\Notification\NotificationSyncer;
 use Flarum\User\AssertPermissionTrait;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;

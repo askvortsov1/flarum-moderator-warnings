@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-moderator-warnings
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
 
 namespace Askvortsov\FlarumWarnings\Model;
 
 use Flarum\Database\AbstractModel;
-use Flarum\User\User;
 use Flarum\Post\Post;
+use Flarum\User\User;
 
 /**
  * @property Date

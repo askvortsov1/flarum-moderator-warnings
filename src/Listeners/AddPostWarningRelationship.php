@@ -1,15 +1,21 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-moderator-warnings
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumWarnings\Listeners;
 
-use Askvortsov\FlarumWarnings\Model\Warning;
 use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
 use Flarum\Api\Controller;
 use Flarum\Api\Event\WillGetData;
 use Flarum\Api\Serializer\BasicPostSerializer;
 use Flarum\Event\GetApiRelationship;
-use Flarum\Event\GetModelRelationship;
-use Flarum\Post\Post;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddPostWarningRelationship
@@ -25,6 +31,7 @@ class AddPostWarningRelationship
 
     /**
      * @param GetApiRelationship $event
+     *
      * @return \Tobscure\JsonApi\Relationship|null
      */
     public function getApiRelationship(GetApiRelationship $event)
@@ -47,7 +54,7 @@ class AddPostWarningRelationship
             $event->addInclude([
                 'posts.warnings',
                 'posts.warnings.warnedUser',
-                'posts.warnings.addedByUser'
+                'posts.warnings.addedByUser',
             ]);
         }
 
@@ -56,7 +63,7 @@ class AddPostWarningRelationship
             $event->addInclude([
                 'warnings',
                 'warnings.warnedUser',
-                'warnings.addedByUser'
+                'warnings.addedByUser',
             ]);
         }
     }

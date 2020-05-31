@@ -1,26 +1,24 @@
 <?php
 
 /*
- * This file is part of askvortsov/flarum-moderator-warnings.
+ * This file is part of askvortsov/flarum-moderator-warnings
  *
- * Copyright (c) 2020 Alexander Skvortsov.
+ *  Copyright (c) 2020 Alexander Skvortsov.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
  */
 
 namespace Askvortsov\FlarumWarnings;
 
-
-use Flarum\Extend;
-use Flarum\Post\Post;
 use Askvortsov\FlarumWarnings\Access\UserPolicy;
 use Askvortsov\FlarumWarnings\Api\Controller;
-use Askvortsov\FlarumWarnings\Listeners;
-use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
 use Askvortsov\FlarumWarnings\Api\Serializer\WarningSerializer;
 use Askvortsov\FlarumWarnings\Model\Warning;
+use Askvortsov\FlarumWarnings\Notification\WarningBlueprint;
 use Flarum\Event\ConfigureNotificationTypes;
+use Flarum\Extend;
+use Flarum\Post\Post;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\View\Factory;
 
@@ -32,7 +30,7 @@ return [
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/resources/less/admin.less'),
 
-    new Extend\Locales(__DIR__ . '/resources/locale'),
+    new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\Routes('api'))
         ->get('/warnings/{user_id}', 'warnings.index', Controller\ListWarningsController::class)

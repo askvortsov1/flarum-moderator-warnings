@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-moderator-warnings
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumWarnings\Api\Serializer;
 
 use Flarum\Api\Serializer\AbstractSerializer;
@@ -19,7 +28,7 @@ class WarningSerializer extends AbstractSerializer
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function getDefaultAttributes($warnings)
     {
@@ -39,7 +48,8 @@ class WarningSerializer extends AbstractSerializer
         return $attributes;
     }
 
-    protected function format($text) {
+    protected function format($text)
+    {
         return $this->formatter->render($this->formatter->parse($text));
     }
 
