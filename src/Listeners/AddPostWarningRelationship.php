@@ -39,7 +39,7 @@ class AddPostWarningRelationship
         if ($event->isRelationship(BasicPostSerializer::class, 'warnings')) {
             $actor = $event->serializer->getActor();
             $author = $event->model->user;
-            if ($author && $actor->id == $author->id || $actor->can('users.viewWarnings', $event->model)) {
+            if ($author && $actor->id == $author->id || $actor->can('user.viewWarnings', $author)) {
                 return $event->serializer->hasMany($event->model, WarningSerializer::class, 'warnings');
             }
         }
