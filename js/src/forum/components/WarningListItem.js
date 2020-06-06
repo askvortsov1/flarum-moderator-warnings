@@ -83,7 +83,7 @@ export default class WarningListItem extends Component {
                 {m.trust(warning.public_comment())}
               </p>
             </li>
-            {app.session.user.canManageWarnings() ? (
+            {app.session.user.canManageWarnings() && warning.private_comment() ? (
               <li className="item-excerpt">
                 <h3 className="WarningListItem-subtitle">
                   {app.translator.trans(
