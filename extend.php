@@ -56,5 +56,5 @@ return [
 
     function (Formatter $formatter) {
         Warning::setFormatter($formatter);
-    }
+    },
 ];
