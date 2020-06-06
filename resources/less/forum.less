@@ -8,6 +8,8 @@
   color: red;
 }
 .Post-warning-preview {
+  padding-top: 0;
+  padding-bottom: 0;
   margin: 5px 0 !important;
   min-width: 400px;
   top: initial;
@@ -17,6 +19,15 @@
     white-space: normal;
     border-bottom: 0;
   }
+
+  .WarningPreview {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .WarningListItem {
+      margin-bottom: 0;
+    }
+  }
 }
 .PostWarning-preview-discussion {
   padding-top: 0 !important;
@@ -24,7 +35,7 @@
   white-space: normal !important;
 }
 
-.Dropdown-menu>li>a.WarningPreview {
+.Dropdown-menu > li > a.WarningPreview {
   &:hover {
     background: unset;
   }
