@@ -10,31 +10,30 @@ import WarningControls from "./WarningControls";
 
 export default class WarningListItem extends Component {
   view() {
-    const { warning } = this.props;
+    const { warning } = this.attrs;
     const addedByUser = warning.addedByUser();
     const controls = WarningControls.controls(warning, this).toArray();
 
-    const attrs = this.attrs();
-
     return (
-      <div {...attrs}>
+      <div {...this.elementAttrs()}>
         {controls.length
-          ? Dropdown.component({
-              icon: "fas fa-ellipsis-v",
-              children: controls,
-              className: "WarningListItem-controls",
-              buttonClassName:
-                "Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right",
-            })
+          ? Dropdown.component(
+              {
+                icon: "fas fa-ellipsis-v",
+                className: "WarningListItem-controls",
+                buttonClassName:
+                  "Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right",
+              },
+              controls
+            )
           : ""}
         <div className="WarningListItem-main">
           <h3 className="WarningListItem-title">
             <a
-              href={addedByUser ? app.route.user(addedByUser) : "#"}
+              route={addedByUser ? app.route.user(addedByUser) : "#"}
               className="WarningListItem-author"
-              config={function (element) {
-                $(element).tooltip({ placement: "right" });
-                m.route.apply(this, arguments);
+              oncreate={(vnode) => {
+                $(vnode.dom).tooltip({ placement: "right" });
               }}
             >
               {avatar(addedByUser)} {username(addedByUser)}
@@ -104,8 +103,8 @@ export default class WarningListItem extends Component {
     );
   }
 
-  attrs() {
-    const { warning } = this.props;
+  elementAttrs() {
+    const { warning } = this.attrs;
     const attrs = {};
 
     attrs.className =

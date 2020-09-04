@@ -6,7 +6,7 @@ import WarningPage from "./components/WarningPage";
 export default function () {
   app.routes["user.warnings"] = {
     path: "/u/:username/warnings",
-    component: WarningPage.component(),
+    component: WarningPage,
   };
 
   extend(UserPage.prototype, "navItems", function (items) {
@@ -18,9 +18,14 @@ export default function () {
     ) {
       items.add(
         "warnings",
-        LinkButton.component({
-          href: app.route("user.warnings", { username: this.user.username() }),
-          children: [
+        LinkButton.component(
+          {
+            href: app.route("user.warnings", {
+              username: this.user.username(),
+            }),
+            icon: "fas fa-exclamation-circle",
+          },
+          [
             app.translator.trans(
               "askvortsov-moderator-warnings.forum.user.warnings"
             ),
@@ -31,9 +36,8 @@ export default function () {
             ) : (
               ""
             ),
-          ],
-          icon: "fas fa-exclamation-circle",
-        }),
+          ]
+        ),
         10
       );
     }

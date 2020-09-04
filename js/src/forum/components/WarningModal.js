@@ -4,12 +4,12 @@ import Button from "flarum/components/Button";
 import username from "flarum/helpers/username";
 
 export default class WarningModal extends Modal {
-  init() {
-    super.init();
+  oninit(vnode) {
+    super.oninit(vnode);
 
-    this.publicComment = m.prop("");
-    this.privateComment = m.prop("");
-    this.strikes = m.prop(0);
+    this.publicComment = m.stream("");
+    this.privateComment = m.stream("");
+    this.strikes = m.stream(0);
   }
 
   className() {
@@ -19,12 +19,11 @@ export default class WarningModal extends Modal {
   title() {
     return app.translator.trans(
       "askvortsov-moderator-warnings.forum.warning_modal.heading",
-      { username: username(this.props.user) }
+      { username: username(this.attrs.user) }
     );
   }
 
   content() {
-    console.log;
     return (
       <div className="Modal-body">
         <div className="Form Form--centered">
@@ -37,10 +36,9 @@ export default class WarningModal extends Modal {
                 <input
                   type="number"
                   className="FormControl"
-                  value={this.strikes()}
+                  bidi={this.strikes}
                   min="0"
                   max="5"
-                  oninput={m.withAttr("value", this.strikes)}
                 ></input>
               </label>
             </div>
@@ -51,14 +49,13 @@ export default class WarningModal extends Modal {
                 {app.translator.trans(
                   "askvortsov-moderator-warnings.forum.warning_modal.public_comment_heading",
                   {
-                    username: username(this.props.user),
+                    username: username(this.attrs.user),
                   }
                 )}
                 <textarea
                   className="FormControl"
-                  value={this.publicComment()}
+                  bidi={this.publicComment}
                   required={true}
-                  oninput={m.withAttr("value", this.publicComment)}
                   rows="6"
                 />
               </label>
@@ -70,13 +67,12 @@ export default class WarningModal extends Modal {
                 {app.translator.trans(
                   "askvortsov-moderator-warnings.forum.warning_modal.private_comment_heading",
                   {
-                    username: username(this.props.user),
+                    username: username(this.attrs.user),
                   }
                 )}
                 <textarea
                   className="FormControl"
-                  value={this.privateComment()}
-                  oninput={m.withAttr("value", this.privateComment)}
+                  bidi={this.privateComment}
                   rows="6"
                 />
               </label>
@@ -110,14 +106,14 @@ export default class WarningModal extends Modal {
     }
 
     const newWarning = {
-      userId: this.props.user.id(),
+      userId: this.attrs.user.id(),
       strikes: this.strikes(),
       public_comment: this.publicComment(),
       private_comment: this.privateComment(),
     };
 
-    if (this.props.post) {
-      newWarning.post = this.props.post;
+    if (this.attrs.post) {
+      newWarning.post = this.attrs.post;
     }
 
     app.store
@@ -125,16 +121,14 @@ export default class WarningModal extends Modal {
       .save(newWarning)
       .then(this.hide.bind(this))
       .then(
-        app.alerts.show(
-          (this.successAlert = new Alert({
-            type: "success",
-            children: app.translator.trans(
-              "askvortsov-moderator-warnings.forum.warning_modal.confirmation_message"
-            ),
-          }))
-        )
+        (this.successAlert = app.alerts.show(
+          app.translator.trans(
+            "askvortsov-moderator-warnings.forum.warning_modal.confirmation_message"
+          ),
+          { type: "success" }
+        ))
       )
-      .then(this.props.callback)
+      .then(this.attrs.callback)
       .catch(() => {});
   }
 }

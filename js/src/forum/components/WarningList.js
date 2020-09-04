@@ -8,11 +8,11 @@ import listItems from "flarum/helpers/listItems";
 import ItemList from "flarum/utils/ItemList";
 
 export default class WarningList extends Component {
-  init() {
-    super.init();
+  oninit(vnode) {
+    super.oninit(vnode);
     this.loading = true;
     this.warnings = [];
-    this.user = this.props.params.user;
+    this.user = this.attrs.params.user;
     this.refresh();
   }
 
@@ -68,13 +68,14 @@ export default class WarningList extends Component {
     if (app.session.user.canManageWarnings()) {
       items.add(
         "create_warning",
-        Button.component({
-          children: app.translator.trans(
+        <Button
+          className="Button Button--primary"
+          onclick={this.handleOnClickCreate.bind(this)}
+        >
+          {app.translator.trans(
             "askvortsov-moderator-warnings.forum.warning_list.add_button"
-          ),
-          className: "Button Button--primary",
-          onclick: this.handleOnClickCreate.bind(this),
-        })
+          )}
+        </Button>
       );
     }
 
@@ -91,7 +92,7 @@ export default class WarningList extends Component {
   parseResults(results) {
     [].push.apply(this.warnings, results);
     this.loading = false;
-    m.lazyRedraw();
+    m.redraw();
 
     return results;
   }
@@ -108,11 +109,9 @@ export default class WarningList extends Component {
 
   handleOnClickCreate(e) {
     e.preventDefault();
-    app.modal.show(
-      new WarningModal({
-        callback: this.refresh.bind(this),
-        ...this.props.params,
-      })
-    );
+    app.modal.show(WarningModal, {
+      callback: this.refresh.bind(this),
+      ...this.attrs.params,
+    });
   }
 }

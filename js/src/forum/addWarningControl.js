@@ -15,15 +15,13 @@ export default function () {
       <Button
         icon="fas fa-exclamation-circle"
         onclick={() =>
-          app.modal.show(
-            new WarningModal({
-              callback: () => {
-                location.reload();
-              },
-              user: post.user(),
-              post: post,
-            })
-          )
+          app.modal.show(WarningModal, {
+            callback: () => {
+              location.reload();
+            },
+            user: post.user(),
+            post: post,
+          })
         }
       >
         {app.translator.trans(
@@ -41,14 +39,12 @@ export default function () {
       <Button
         icon="fas fa-exclamation-circle"
         onclick={() =>
-          app.modal.show(
-            new WarningModal({
-              callback: () => {
-                location.reload();
-              },
-              user: user,
-            })
-          )
+          app.modal.show(WarningModal, {
+            callback: () => {
+              location.reload();
+            },
+            user: user,
+          })
         }
       >
         {app.translator.trans(
