@@ -122,10 +122,10 @@ export default class WarningModal extends Modal {
       .then(this.hide.bind(this))
       .then(
         (this.successAlert = app.alerts.show(
+          { type: "success" },
           app.translator.trans(
             "askvortsov-moderator-warnings.forum.warning_modal.confirmation_message"
-          ),
-          { type: "success" }
+          )
         ))
       )
       .then(this.attrs.callback)
