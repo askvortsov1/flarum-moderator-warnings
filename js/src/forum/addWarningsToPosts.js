@@ -8,7 +8,7 @@ export default function addWarningsToPosts() {
   Post.prototype.warnings = Model.hasMany("warnings");
 
   extend(CommentPost.prototype, "footerItems", function (items) {
-    const post = this.props.post;
+    const post = this.attrs.post;
     const warnings = post.warnings();
 
     if (!warnings) return;

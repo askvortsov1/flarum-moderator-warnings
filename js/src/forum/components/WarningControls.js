@@ -70,37 +70,31 @@ export default {
     if (!warning.isHidden() && app.session.user.canManageWarnings()) {
       items.add(
         "hide",
-        Button.component({
-          icon: "far fa-trash-alt",
-          children: app.translator.trans(
+        <Button icon="far fa-trash-alt" onclick={this.hideAction.bind(warning)}>
+          {app.translator.trans(
             "askvortsov-moderator-warnings.forum.warning_controls.delete_button"
-          ),
-          onclick: this.hideAction.bind(warning),
-        })
+          )}
+        </Button>
       );
     }
     if (warning.isHidden() && app.session.user.canManageWarnings()) {
       items.add(
         "restore",
-        Button.component({
-          icon: "fas fa-reply",
-          children: app.translator.trans(
+        <Button icon="fas fa-reply" onclick={this.restoreAction.bind(warning)}>
+          {app.translator.trans(
             "askvortsov-moderator-warnings.forum.warning_controls.restore_button"
-          ),
-          onclick: this.restoreAction.bind(warning),
-        })
+          )}
+        </Button>
       );
     }
     if (warning.isHidden() && app.session.user.canDeleteWarnings()) {
       items.add(
         "delete",
-        Button.component({
-          icon: "fas fa-times",
-          children: app.translator.trans(
+        <Button icon="fas fa-times" onclick={this.deleteAction.bind(warning)}>
+          {app.translator.trans(
             "askvortsov-moderator-warnings.forum.warning_controls.delete_forever_button"
-          ),
-          onclick: this.deleteAction.bind(warning, context),
-        })
+          )}
+        </Button>
       );
     }
 

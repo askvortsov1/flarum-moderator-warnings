@@ -2,8 +2,9 @@ import UserPage from "flarum/components/UserPage";
 import WarningList from "./WarningList";
 
 export default class WarningPage extends UserPage {
-  init() {
-    super.init();
+  oninit(vnode) {
+    super.oninit(vnode);
+
     this.loadUser(m.route.param("username"));
   }
 

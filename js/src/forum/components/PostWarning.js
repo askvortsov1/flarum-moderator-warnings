@@ -4,10 +4,10 @@ import username from "flarum/helpers/username";
 import WarningPreview from "./WarningPreview";
 
 export default class PostWarning extends Component {
-  init() {
-    super.init();
+  oninit(vnode) {
+    super.oninit(vnode);
 
-    this.warning = this.props.warning;
+    this.warning = this.attrs.warning;
   }
 
   view() {
@@ -35,8 +35,8 @@ export default class PostWarning extends Component {
     );
   }
 
-  config(isInitialized) {
-    if (isInitialized) return;
+  oncreate(vnode) {
+    super.oncreate(vnode);
 
     const warning = this.warning;
 

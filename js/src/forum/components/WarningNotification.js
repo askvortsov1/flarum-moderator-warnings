@@ -14,14 +14,14 @@ export default class WarningNotification extends Notification {
   }
 
   content() {
-    const warning = this.props.notification.subject();
+    const warning = this.attrs.notification.subject();
 
     if (warning.strikes()) {
       return app.translator.transChoice(
         "askvortsov-moderator-warnings.forum.notifications.warning_text",
         warning.strikes(),
         {
-          mod_username: username(this.props.notification.fromUser()),
+          mod_username: username(this.attrs.notification.fromUser()),
           strikes: warning.strikes() || "0",
         }
       );
@@ -29,7 +29,7 @@ export default class WarningNotification extends Notification {
       return app.translator.trans(
         "askvortsov-moderator-warnings.forum.notifications.warning_no_strikes_text",
         {
-          mod_username: username(this.props.notification.fromUser()),
+          mod_username: username(this.attrs.notification.fromUser()),
         }
       );
     }

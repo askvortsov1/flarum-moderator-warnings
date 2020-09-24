@@ -2,20 +2,19 @@ import Component from "flarum/Component";
 import WarningListItem from "./WarningListItem";
 
 export default class WarningPreview extends Component {
-  init() {
-    super.init();
+  oninit(vnode) {
+    super.oninit(vnode);
 
-    this.warning = this.props.warning;
+    this.warning = this.attrs.warning;
   }
 
   view() {
     return (
       <a
         className="WarningPreview"
-        href={app.route("user.warnings", {
+        route={app.route("user.warnings", {
           username: this.warning.warnedUser().username(),
         })}
-        config={m.route}
       >
         <WarningListItem warning={this.warning}></WarningListItem>
       </a>

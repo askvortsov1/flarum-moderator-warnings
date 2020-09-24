@@ -6,16 +6,14 @@ export default class WarningPost extends Component {
     return (
       <div className="WarningPost">
         <ul class="Dropdown-menu PostPreview-preview fade in">
-          <li>{PostPreview.component({ post: this.props.post })}</li>
+          <li>{PostPreview.component({ post: this.attrs.post })}</li>
         </ul>
       </div>
     );
   }
 
-  config(isInitialized) {
-    if (isInitialized) return;
-
-    let timeout;
+  oncreate(vnode) {
+    super.oncreate(vnode);
 
     this.$(".PostPreview-preview").show().css("position", "relative");
   }
