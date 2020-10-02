@@ -1,15 +1,15 @@
-import Alert from "flarum/components/Alert";
 import Modal from "flarum/components/Modal";
 import Button from "flarum/components/Button";
 import username from "flarum/helpers/username";
+import Stream from "flarum/utils/Stream";
 
 export default class WarningModal extends Modal {
   oninit(vnode) {
     super.oninit(vnode);
 
-    this.publicComment = m.stream("");
-    this.privateComment = m.stream("");
-    this.strikes = m.stream(0);
+    this.publicComment = Stream("");
+    this.privateComment = Stream("");
+    this.strikes = Stream(0);
   }
 
   className() {
