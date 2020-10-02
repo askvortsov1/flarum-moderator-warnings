@@ -1,4 +1,5 @@
 import Component from "flarum/Component";
+import Link from "flarum/components/Link";
 import WarningListItem from "./WarningListItem";
 
 export default class WarningPreview extends Component {
@@ -10,14 +11,14 @@ export default class WarningPreview extends Component {
 
   view() {
     return (
-      <a
+      <Link
         className="WarningPreview"
-        route={app.route("user.warnings", {
+        href={app.route("user.warnings", {
           username: this.warning.warnedUser().username(),
         })}
       >
         <WarningListItem warning={this.warning}></WarningListItem>
-      </a>
+      </Link>
     );
   }
 }

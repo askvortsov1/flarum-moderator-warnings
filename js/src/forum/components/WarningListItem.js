@@ -1,10 +1,10 @@
 import Component from "flarum/Component";
+import Dropdown from "flarum/components/Dropdown";
+import Link from "flarum/components/Link";
 import avatar from "flarum/helpers/avatar";
 import username from "flarum/helpers/username";
-import fullTime from "flarum/helpers/fullTime";
 import humanTime from "flarum/helpers/humanTime";
 import classList from "flarum/utils/classList";
-import Dropdown from "flarum/components/Dropdown";
 import WarningPost from "./WarningPost";
 import WarningControls from "./WarningControls";
 
@@ -29,15 +29,15 @@ export default class WarningListItem extends Component {
           : ""}
         <div className="WarningListItem-main">
           <h3 className="WarningListItem-title">
-            <a
-              route={addedByUser ? app.route.user(addedByUser) : "#"}
+            <Link
+              href={addedByUser ? app.route.user(addedByUser) : "#"}
               className="WarningListItem-author"
               oncreate={(vnode) => {
                 $(vnode.dom).tooltip({ placement: "right" });
               }}
             >
               {avatar(addedByUser)} {username(addedByUser)}
-            </a>
+            </Link>
           </h3>
           <span class="WarningListItem-strikes">
             {warning.isHidden()
