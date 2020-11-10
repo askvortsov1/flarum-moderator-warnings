@@ -41,7 +41,7 @@ return [
     (new Extend\Model(Post::class))
         ->hasMany('warnings', Warning::class, 'post_id'),
 
-    (new Extend\View())->namespace('askvortsov-moderator-warnings', __DIR__ . '/views')
+    (new Extend\View())->namespace('askvortsov-moderator-warnings', __DIR__ . '/views'),
 
     function (Dispatcher $events) {
         $events->subscribe(Listeners\AddPermissionsToUserSerializer::class);
