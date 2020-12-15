@@ -9,7 +9,7 @@
   "support": {
     "issues": "https://github.com/askvortsov1/flarum-moderator-warnings/issues",
     "source": "https://github.com/askvortsov1/flarum-moderator-warnings",
-    "forum": "https://discuss.flarum.org/d/23004-flarum-help-tags"
+    "forum": "https://discuss.flarum.org/d/23228-moderator-warnings-extension"
   },
   "require": {
     "flarum/core": "^0.1.0-beta.15"
