@@ -11,15 +11,11 @@
 
 namespace Askvortsov\FlarumWarnings\Access;
 
-use Flarum\User\AbstractPolicy;
+use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
 
 class UserPolicy extends AbstractPolicy
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected $model = User::class;
 
     /**
      * @param User $actor
@@ -30,10 +26,8 @@ class UserPolicy extends AbstractPolicy
      */
     public function can(User $actor, $ability, User $user)
     {
-        if ($ability == 'user.viewWarnings' && $actor->id == $user->id) {
-            return true;
-        } elseif ($ability == 'user.viewWarnings') {
-            return $actor->can('user.viewWarnings');
+        if ($ability === 'user.viewWarnings' && $actor->id == $user->id) {
+            return $this->allow();
         }
     }
 }

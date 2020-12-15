@@ -1,11 +1,9 @@
 import app from "flarum/app";
-import { extend } from "flarum/extend";
-import PermissionGrid from "flarum/components/PermissionGrid";
 
 app.initializers.add("askvortsov/flarum-moderator-warnings", () => {
-  extend(PermissionGrid.prototype, "moderateItems", (items) => {
-    items.add(
-      "moderator-warnings-view",
+  app.extensionData
+    .for("askvortsov-moderator-warnings")
+    .registerPermission(
       {
         icon: "fas fa-images",
         label: app.translator.trans(
@@ -13,10 +11,10 @@ app.initializers.add("askvortsov/flarum-moderator-warnings", () => {
         ),
         permission: "user.viewWarnings",
       },
+      "moderate",
       3
-    );
-    items.add(
-      "moderator-warnings-manage",
+    )
+    .registerPermission(
       {
         icon: "fas fa-edit",
         label: app.translator.trans(
@@ -24,10 +22,10 @@ app.initializers.add("askvortsov/flarum-moderator-warnings", () => {
         ),
         permission: "user.manageWarnings",
       },
+      "moderate",
       3
-    );
-    items.add(
-      "moderator-warnings-delete",
+    )
+    .registerPermission(
       {
         icon: "fas fa-times",
         label: app.translator.trans(
@@ -35,7 +33,7 @@ app.initializers.add("askvortsov/flarum-moderator-warnings", () => {
         ),
         permission: "user.deleteWarnings",
       },
+      "moderate",
       3
     );
-  });
 });
