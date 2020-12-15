@@ -16,7 +16,6 @@ use Flarum\User\User;
 
 class UserPolicy extends AbstractPolicy
 {
-
     /**
      * @param User $actor
      * @param $ability

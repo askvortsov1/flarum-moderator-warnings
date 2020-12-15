@@ -78,7 +78,6 @@ return [
             'posts.warnings.addedByUser',
         ]),
 
-
     (new Extend\ApiController(FlarumController\ListPostsController::class))
         ->addInclude([
             'warnings',

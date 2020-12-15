@@ -69,8 +69,8 @@ class WarningBlueprint implements BlueprintInterface, MailableInterface
     {
         return $translator->trans($this->getTranslation().'.subject', [
             '{warner_display_name}' => $this->warning->addedByUser->display_name,
-            '{strikes}' => $this->warning->strikes,
-            '{discussion_title}' => $this->warning->post ? $this->warning->post->discussion->title : '',
+            '{strikes}'             => $this->warning->strikes,
+            '{discussion_title}'    => $this->warning->post ? $this->warning->post->discussion->title : '',
         ]);
     }
 
