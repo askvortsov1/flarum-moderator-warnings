@@ -20,7 +20,7 @@ export default class WarningList extends Component {
     let loading;
 
     if (this.loading) {
-      loading = LoadingIndicator.component();
+      loading = LoadingIndicator.component({ size: "large" });
     }
 
     return (
