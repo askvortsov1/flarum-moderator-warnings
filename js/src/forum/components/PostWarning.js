@@ -16,11 +16,10 @@ export default class PostWarning extends Component {
         <span className="Post-warning-summary">
           {icon("fas fa-exclamation-circle")}
           {this.warning.strikes()
-            ? app.translator.transChoice(
+            ? app.translator.trans(
                 "askvortsov-moderator-warnings.forum.post.warning",
-                this.warning.strikes(),
                 {
-                  strikes: this.warning.strikes() || "0",
+                  strikes: this.warning.strikes() || 0,
                   mod_username: username(this.warning.addedByUser()),
                 }
               )

@@ -27,10 +27,9 @@ export default class WarningList extends Component {
       <div className="WarningList">
         <h1 className="WarningList-warnings">
           {this.strikeCount()
-            ? app.translator.transChoice(
+            ? app.translator.trans(
                 "askvortsov-moderator-warnings.forum.warning_list.warnings",
-                this.strikeCount(),
-                { strikes: this.strikeCount() || "0" }
+                { strikes: this.strikeCount() || 0 }
               )
             : app.translator.trans(
                 "askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes"

@@ -1,6 +1,5 @@
 import Notification from "flarum/components/Notification";
 import username from "flarum/helpers/username";
-import { truncate } from "flarum/utils/string";
 
 export default class WarningNotification extends Notification {
   icon() {
@@ -17,12 +16,11 @@ export default class WarningNotification extends Notification {
     const warning = this.attrs.notification.subject();
 
     if (warning.strikes()) {
-      return app.translator.transChoice(
+      return app.translator.trans(
         "askvortsov-moderator-warnings.forum.notifications.warning_text",
-        warning.strikes(),
         {
           mod_username: username(this.attrs.notification.fromUser()),
-          strikes: warning.strikes() || "0",
+          strikes: warning.strikes() || 0,
         }
       );
     } else {

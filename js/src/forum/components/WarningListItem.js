@@ -41,20 +41,18 @@ export default class WarningListItem extends Component {
           </h3>
           <span class="WarningListItem-strikes">
             {warning.isHidden()
-              ? app.translator.transChoice(
+              ? app.translator.trans(
                   "askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading_hidden",
-                  warning.strikes(),
                   {
                     time: humanTime(warning.createdAt()),
-                    strikes: warning.strikes() || "0",
+                    strikes: warning.strikes() || 0,
                   }
                 )
-              : app.translator.transChoice(
+              : app.translator.trans(
                   "askvortsov-moderator-warnings.forum.warning_list_item.list_item_heading",
-                  warning.strikes(),
                   {
                     time: humanTime(warning.createdAt()),
-                    strikes: warning.strikes() || "0",
+                    strikes: warning.strikes() || 0,
                   }
                 )}
           </span>
