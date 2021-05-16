@@ -32,9 +32,6 @@ export default class WarningListItem extends Component {
             <Link
               href={addedByUser ? app.route.user(addedByUser) : "#"}
               className="WarningListItem-author"
-              oncreate={(vnode) => {
-                $(vnode.dom).tooltip({ placement: "right" });
-              }}
             >
               {avatar(addedByUser)} {username(addedByUser)}
             </Link>
