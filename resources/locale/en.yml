@@ -6,11 +6,11 @@ askvortsov-moderator-warnings:
       delete_warnings: Permanently delete moderator warnings
   emails:
     post_warned:
-      subject: "{warner_display_name} warned you with {strikes} strikes in {discussion_title}"
+      subject: "{warner_display_name} warned you with {strikes, plural, one {# strike} other {# strikes}} in {discussion_title}"
       body: |
         Hey {warnee_display_name}!
 
-        {warner_display_name} warned you with {strikes} strikes in {discussion_title}
+        {warner_display_name} warned you with {strikes, plural, one {# strike} other {# strikes}} in {discussion_title}
 
         The following reason was given:
 
@@ -18,11 +18,11 @@ askvortsov-moderator-warnings:
 
         {public_comment}
     user_warned:
-      subject: "{warner_display_name} warned you with {strikes} strikes"
+      subject: "{warner_display_name} warned you with {strikes, plural, one {# strike} other {# strikes}}"
       body: |
         Hey {warnee_display_name}!
 
-        {warner_display_name} warned you with {strikes} strikes
+        {warner_display_name} warned you with {strikes, plural, one {# strike} other {# strikes}}
 
         The following reason was given:
 
