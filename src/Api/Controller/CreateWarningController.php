@@ -75,7 +75,7 @@ class CreateWarningController extends AbstractCreateController
             $warning->post_id = $requestRelationships['post']['data']['id'];
         }
 
-        if (!$warning->strikes) {
+        if (! $warning->strikes) {
             $warning->strikes = 0;
         }
 
