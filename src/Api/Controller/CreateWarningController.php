@@ -55,6 +55,7 @@ class CreateWarningController extends AbstractCreateController
         $actor->assertCan('user.manageWarnings');
 
         $requestData = $request->getParsedBody()['data']['attributes'];
+        $requestRelationships = $request->getParsedBody()['data']['relationships'];
 
         $publicComment = $requestData['public_comment'];
 
@@ -70,8 +71,8 @@ class CreateWarningController extends AbstractCreateController
         $warning->created_user_id = $actor->id;
         $warning->created_at = Carbon::now();
 
-        if (array_key_exists('post', $requestData)) {
-            $warning->post_id = $requestData['post']['data']['id'];
+        if (array_key_exists('post', $requestRelationships)) {
+            $warning->post_id = $requestRelationships['post']['data']['id'];
         }
 
         if (!$warning->strikes) {
