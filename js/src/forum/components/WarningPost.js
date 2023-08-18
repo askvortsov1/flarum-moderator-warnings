@@ -1,5 +1,5 @@
-import Component from "flarum/Component";
-import PostPreview from "flarum/components/PostPreview";
+import Component from 'flarum/Component';
+import PostPreview from 'flarum/components/PostPreview';
 
 export default class WarningPost extends Component {
   view() {
@@ -15,6 +15,6 @@ export default class WarningPost extends Component {
   oncreate(vnode) {
     super.oncreate(vnode);
 
-    this.$(".PostPreview-preview").show().css("position", "relative");
+    this.$('.PostPreview-preview').show().css('position', 'relative');
   }
 }

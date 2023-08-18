@@ -1,6 +1,6 @@
-import Component from "flarum/Component";
-import Link from "flarum/components/Link";
-import WarningListItem from "./WarningListItem";
+import Component from 'flarum/Component';
+import Link from 'flarum/components/Link';
+import WarningListItem from './WarningListItem';
 
 export default class WarningPreview extends Component {
   oninit(vnode) {
@@ -13,7 +13,7 @@ export default class WarningPreview extends Component {
     return (
       <Link
         className="WarningPreview"
-        href={app.route("user.warnings", {
+        href={app.route('user.warnings', {
           username: this.warning.warnedUser().username(),
         })}
       >

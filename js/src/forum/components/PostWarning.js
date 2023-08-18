@@ -1,7 +1,7 @@
-import Component from "flarum/Component";
-import icon from "flarum/helpers/icon";
-import username from "flarum/helpers/username";
-import WarningPreview from "./WarningPreview";
+import Component from 'flarum/Component';
+import icon from 'flarum/helpers/icon';
+import username from 'flarum/helpers/username';
+import WarningPreview from './WarningPreview';
 
 export default class PostWarning extends Component {
   oninit(vnode) {
@@ -14,21 +14,15 @@ export default class PostWarning extends Component {
     return (
       <div className="Post-warning">
         <span className="Post-warning-summary">
-          {icon("fas fa-exclamation-circle")}
+          {icon('fas fa-exclamation-circle')}
           {this.warning.strikes()
-            ? app.translator.trans(
-                "askvortsov-moderator-warnings.forum.post.warning",
-                {
-                  strikes: this.warning.strikes() || 0,
-                  mod_username: username(this.warning.addedByUser()),
-                }
-              )
-            : app.translator.trans(
-                "askvortsov-moderator-warnings.forum.post.warning_no_strikes",
-                {
-                  mod_username: username(this.warning.addedByUser()),
-                }
-              )}
+            ? app.translator.trans('askvortsov-moderator-warnings.forum.post.warning', {
+                strikes: this.warning.strikes() || 0,
+                mod_username: username(this.warning.addedByUser()),
+              })
+            : app.translator.trans('askvortsov-moderator-warnings.forum.post.warning_no_strikes', {
+                mod_username: username(this.warning.addedByUser()),
+              })}
         </span>
       </div>
     );
@@ -42,9 +36,9 @@ export default class PostWarning extends Component {
     let timeout;
 
     const hidePreview = () => {
-      this.$(".Post-warning-preview")
-        .removeClass("in")
-        .one("transitionend", function () {
+      this.$('.Post-warning-preview')
+        .removeClass('in')
+        .one('transitionend', function () {
           $(this).hide();
         });
     };
@@ -58,19 +52,14 @@ export default class PostWarning extends Component {
         function () {
           clearTimeout(timeout);
           timeout = setTimeout(function () {
-            if (!$preview.hasClass("in") && $preview.is(":visible")) return;
+            if (!$preview.hasClass('in') && $preview.is(':visible')) return;
 
             // When the user hovers their mouse over the list of people who have
             // replied to the post, render a list of reply previews into a
             // popup.
-            m.render(
-              $preview[0],
-              <li data-id={warning.id()}>
-                {WarningPreview.component({ warning })}
-              </li>
-            );
+            m.render($preview[0], <li data-id={warning.id()}>{WarningPreview.component({ warning })}</li>);
             $preview.show();
-            setTimeout(() => $preview.off("transitionend").addClass("in"));
+            setTimeout(() => $preview.off('transitionend').addClass('in'));
           }, 200);
         },
         function () {
@@ -82,16 +71,16 @@ export default class PostWarning extends Component {
     // Whenever the user hovers their mouse over a particular name in the
     // list of repliers, highlight the corresponding post in the preview
     // popup.
-    $(".Post-warning")
-      .find(".Post-warning-summary a")
+    $('.Post-warning')
+      .find('.Post-warning-summary a')
       .hover(
         function () {
-          $(".Post-warning")
-            .find('[data-number="' + $(this).data("number") + '"]')
-            .addClass("active");
+          $('.Post-warning')
+            .find('[data-number="' + $(this).data('number') + '"]')
+            .addClass('active');
         },
         function () {
-          $(".Post-warning").find("[data-number]").removeClass("active");
+          $('.Post-warning').find('[data-number]').removeClass('active');
         }
       );
   }

@@ -1,11 +1,11 @@
-import Component from "flarum/Component";
-import app from "flarum/app";
-import LoadingIndicator from "flarum/components/LoadingIndicator";
-import WarningListItem from "./WarningListItem";
-import Button from "flarum/components/Button";
-import WarningModal from "./WarningModal";
-import listItems from "flarum/helpers/listItems";
-import ItemList from "flarum/utils/ItemList";
+import Component from 'flarum/Component';
+import app from 'flarum/app';
+import LoadingIndicator from 'flarum/components/LoadingIndicator';
+import WarningListItem from './WarningListItem';
+import Button from 'flarum/components/Button';
+import WarningModal from './WarningModal';
+import listItems from 'flarum/helpers/listItems';
+import ItemList from 'flarum/utils/ItemList';
 
 export default class WarningList extends Component {
   oninit(vnode) {
@@ -20,25 +20,18 @@ export default class WarningList extends Component {
     let loading;
 
     if (this.loading) {
-      loading = LoadingIndicator.component({ size: "large" });
+      loading = LoadingIndicator.component({ size: 'large' });
     }
 
     return (
       <div className="WarningList">
         <h1 className="WarningList-warnings">
           {this.strikeCount()
-            ? app.translator.trans(
-                "askvortsov-moderator-warnings.forum.warning_list.warnings",
-                { strikes: this.strikeCount() || 0 }
-              )
-            : app.translator.trans(
-                "askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes"
-              )}
+            ? app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings', { strikes: this.strikeCount() || 0 })
+            : app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.warnings_no_strikes')}
         </h1>
         <div class="Warnings-toolbar">
-          <ul className="Warnings-toolbar-action">
-            {listItems(this.actionItems().toArray())}
-          </ul>
+          <ul className="Warnings-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
         </div>
         <ul className="WarningList-Warnings">
           {this.warnings.map((warning) => {
@@ -49,11 +42,7 @@ export default class WarningList extends Component {
             );
           })}
           {!this.loading && this.warnings.length === 0 && (
-            <label>
-              {app.translator.trans(
-                "askvortsov-moderator-warnings.forum.warning_list.no_warnings"
-              )}
-            </label>
+            <label>{app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.no_warnings')}</label>
           )}
         </ul>
         <div className="WarningList-loadMore">{loading}</div>
@@ -66,14 +55,9 @@ export default class WarningList extends Component {
 
     if (app.session.user.canManageWarnings()) {
       items.add(
-        "create_warning",
-        <Button
-          className="Button Button--primary"
-          onclick={this.handleOnClickCreate.bind(this)}
-        >
-          {app.translator.trans(
-            "askvortsov-moderator-warnings.forum.warning_list.add_button"
-          )}
+        'create_warning',
+        <Button className="Button Button--primary" onclick={this.handleOnClickCreate.bind(this)}>
+          {app.translator.trans('askvortsov-moderator-warnings.forum.warning_list.add_button')}
         </Button>
       );
     }
@@ -98,7 +82,7 @@ export default class WarningList extends Component {
 
   refresh() {
     return app.store
-      .find("warnings", this.user.id())
+      .find('warnings', this.user.id())
       .catch(() => {})
       .then((results) => {
         this.warnings = [];

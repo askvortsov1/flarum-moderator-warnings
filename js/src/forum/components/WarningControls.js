@@ -1,6 +1,6 @@
-import Button from "flarum/components/Button";
-import Separator from "flarum/components/Separator";
-import ItemList from "flarum/utils/ItemList";
+import Button from 'flarum/components/Button';
+import Separator from 'flarum/components/Separator';
+import ItemList from 'flarum/utils/ItemList';
 
 /**
  * The `WarningControls` utility constructs a list of buttons for a warning which
@@ -19,11 +19,11 @@ export default {
   controls(warning, context) {
     const items = new ItemList();
 
-    ["user", "moderation", "destructive"].forEach((section) => {
-      const controls = this[section + "Controls"](warning, context).toArray();
+    ['user', 'moderation', 'destructive'].forEach((section) => {
+      const controls = this[section + 'Controls'](warning, context).toArray();
       if (controls.length) {
         controls.forEach((item) => items.add(item.itemName, item));
-        items.add(section + "Separator", Separator.component());
+        items.add(section + 'Separator', Separator.component());
       }
     });
 
@@ -69,31 +69,25 @@ export default {
     const items = new ItemList();
     if (!warning.isHidden() && app.session.user.canManageWarnings()) {
       items.add(
-        "hide",
+        'hide',
         <Button icon="far fa-trash-alt" onclick={this.hideAction.bind(warning)}>
-          {app.translator.trans(
-            "askvortsov-moderator-warnings.forum.warning_controls.delete_button"
-          )}
+          {app.translator.trans('askvortsov-moderator-warnings.forum.warning_controls.delete_button')}
         </Button>
       );
     }
     if (warning.isHidden() && app.session.user.canManageWarnings()) {
       items.add(
-        "restore",
+        'restore',
         <Button icon="fas fa-reply" onclick={this.restoreAction.bind(warning)}>
-          {app.translator.trans(
-            "askvortsov-moderator-warnings.forum.warning_controls.restore_button"
-          )}
+          {app.translator.trans('askvortsov-moderator-warnings.forum.warning_controls.restore_button')}
         </Button>
       );
     }
     if (warning.isHidden() && app.session.user.canDeleteWarnings()) {
       items.add(
-        "delete",
+        'delete',
         <Button icon="fas fa-times" onclick={this.deleteAction.bind(warning)}>
-          {app.translator.trans(
-            "askvortsov-moderator-warnings.forum.warning_controls.delete_forever_button"
-          )}
+          {app.translator.trans('askvortsov-moderator-warnings.forum.warning_controls.delete_forever_button')}
         </Button>
       );
     }
