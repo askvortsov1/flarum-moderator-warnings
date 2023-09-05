@@ -55,7 +55,7 @@ class CreateWarningController extends AbstractCreateController
         $actor->assertCan('user.manageWarnings');
 
         $requestData = $request->getParsedBody()['data']['attributes'];
-        $requestRelationships = $request->getParsedBody()['data']['relationships'];
+        $requestRelationships = $request->getParsedBody()['data']['relationships'] ?? [];
 
         $publicComment = $requestData['public_comment'];
 
