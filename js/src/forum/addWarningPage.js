@@ -19,7 +19,7 @@ export default function () {
         LinkButton.component(
           {
             href: app.route('user.warnings', {
-              username: this.user.username(),
+              username: this.user.slug(),
             }),
             icon: 'fas fa-exclamation-circle',
           },
