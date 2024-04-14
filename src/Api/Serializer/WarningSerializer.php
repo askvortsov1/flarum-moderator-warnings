@@ -27,12 +27,12 @@ class WarningSerializer extends AbstractSerializer
     protected function getDefaultAttributes($warnings)
     {
         $attributes = [
-            'id'               => $warnings->id,
-            'userId'           => $warnings->user_id,
-            'public_comment'   => $this->format($warnings->public_comment),
-            'strikes'          => $warnings->strikes,
-            'createdAt'        => $this->formatDate($warnings->created_at),
-            'hiddenAt'         => $this->formatDate($warnings->hidden_at),
+            'id' => $warnings->id,
+            'userId' => $warnings->user_id,
+            'public_comment' => $this->format($warnings->public_comment),
+            'strikes' => $warnings->strikes,
+            'createdAt' => $this->formatDate($warnings->created_at),
+            'hiddenAt' => $this->formatDate($warnings->hidden_at),
         ];
 
         if ($this->actor->can('user.manageWarnings')) {
