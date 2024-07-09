@@ -79,7 +79,7 @@ class CreateWarningController extends AbstractCreateController
             $warning->strikes = 0;
         }
 
-        if ($warning->strikes < 0 || $warning->strikes > 5) {
+        if ($warning->strikes < 0) {
             throw new ValidationException(['message' => $this->translator->trans('askvortsov-moderator-warnings.forum.validation.invalid_strike_count')]);
         }
 
